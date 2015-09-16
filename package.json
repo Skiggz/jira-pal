@@ -1,0 +1,19 @@
+{
+  "name": "jira-pal",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Jira Terminal Pal",
+  "keywords": [],
+  "dependencies": {
+    "bluebird": "~2.10.0",
+    "inquirer": "^0.10.0",
+    "moment": "~2.10.3",
+    "numeral": "~1.5.3",
+    "underscore": "~1.8.2",
+    "underscore.string": "~3.0.3"
+  },
+  "main": "src/jira.js",
+  "repository": "https://github.com/Skiggz/jira-pal",
+  "author": "Skylar Lowery <skylar.lowery21@gmail.com>",
+  "license": "MIT"
+}

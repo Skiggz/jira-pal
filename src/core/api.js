@@ -23,10 +23,8 @@ function api(method, path, headers, data) {
         if (creds) {
             headers['Authorization'] = _s.sprintf('Basic: %s', creds);
         }
-        if (data) {
-            // All of JIRAs apis are application json, if data, set type
-            headers['Content-Type'] = 'application/json';
-        }
+        // All of JIRAs apis are application json, if data, set type
+        headers['Content-Type'] = 'application/json';
         var request = https.request({
             hostname: settings.url,
             port: 443,

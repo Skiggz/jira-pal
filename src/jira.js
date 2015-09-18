@@ -18,33 +18,44 @@ _.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
 });
 
 /*
- * Check to see if the credentials module exists, if not
- * create it.
- * */
-if (!fs.exists(settings.credentialsFileLocation)) {
-    commands.logout();
-}
+* Some commands to not require login, list those here
+* and it won't prompt for login if those commands are
+* specified
+* */
 
-var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
+var ANNONYMOUS_COMMANDS = [ 'login', 'logout', 'init' ];
+var command = process.argv[2];
 
-var updateApi = function(credentials) {
+if (ANNONYMOUS_COMMANDS.indexOf(command) === -1) {
     /*
-     * Logged in. Now execute the command they requested
-     *
-     * Always update the http client with the current credentials
+     * Check to see if the credentials module exists, if not
+     * create it.
      * */
-    api.init(credentials);
-};
+    if (!fs.exists(settings.credentialsFileLocation)) {
+        commands.logout();
+    }
 
-if (creds === null) {
-    print.ask(
-        print.question('input', 'username', 'JIRA Login'),
-        print.question('password', 'username', 'JIRA Password')
-    ).then(function(answer) {
-        updateApi(
-            commands.login(answer.username, answer.password)
-        );
-    });
-} else {
-    updateApi(creds);
+    var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
+
+    var updateApi = function(credentials) {
+        /*
+         * Logged in. Now execute the command they requested
+         *
+         * Always update the http client with the current credentials
+         * */
+        api.init(credentials);
+    };
+
+    if (creds === null) {
+        print.ask(
+            print.question('input', 'username', 'JIRA Login'),
+            print.question('password', 'username', 'JIRA Password')
+        ).then(function(answer) {
+                updateApi(
+                    commands.login(answer.username, answer.password)
+                );
+            });
+    } else {
+        updateApi(creds);
+    }
 }

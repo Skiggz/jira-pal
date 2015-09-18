@@ -45,3 +45,4 @@ module.exports = function() {
 };
 
 module.exports.requiresLogin = false;
+module.exports.moduleDescription = 'Prompts you to update all settings overrides you may be interested in.';

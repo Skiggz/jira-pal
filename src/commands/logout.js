@@ -19,3 +19,4 @@ module.exports = function() {
 };
 
 module.exports.requiresLogin = false;
+module.exports.moduleDescription = 'Removes base64 locally stored credentials';

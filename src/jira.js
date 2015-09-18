@@ -24,7 +24,8 @@ _.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
 * */
 
 var ANNONYMOUS_COMMANDS = [ 'login', 'logout', 'init' ];
-var command = process.argv[2];
+// default command is help, and avoids index out of bounds errors
+var command = process.argv.length > 2 ? process.argv[2] : 'help';
 
 if (ANNONYMOUS_COMMANDS.indexOf(command) === -1) {
     /*

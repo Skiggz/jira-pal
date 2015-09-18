@@ -18,6 +18,11 @@
 * To override settings you can add your own `data/settings-override.js`
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
   * Make sure your `data/settings-override.js` exports a js object with desired settings
+  
+###Current Settings Options
+
+* `colors`: If truthy, show terminal colors in output. Default `true`
+* `credentialsFileLocation`: Tells the application where to store the base64 basic auth credentials
 
 ##Security
 

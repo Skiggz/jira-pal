@@ -1,4 +1,5 @@
 var fs = require('fs');
+var settings = require('../data/settings');
 module.exports = function() {
     /*
     * The API for jira is oauth or basic auth, for simplicity
@@ -14,5 +15,5 @@ module.exports = function() {
     * worried, change it, or implement a friendly terminal oauth
     * solution :)
     * */
-    fs.writeFileSync(__dirname + '/data/credentials.js', 'module.exports = null;');
+    fs.writeFileSync(settings.credentialsFileLocation, 'module.exports = null;');
 };

@@ -3,7 +3,8 @@ var _ = require('underscore');
 var print = require('../core/print');
 
 module.exports = {
-    colors: true
+    colors: true,
+    credentialsFileLocation: __dirname + '/credentials.js'
 };
 
 if (fs.existsSync(__dirname + '/settings-override.js')) {

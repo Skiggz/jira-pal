@@ -10,8 +10,8 @@ var commands = require('./core/commands');
 var command = process.argv.length > 2 ? process.argv[2] : settings.defaultCommand;
 
 if (!commands[command]) {
-    command = 'help';
     print.fail(_s.sprintf('Command "%s" not found.', command));
+    command = 'help';
 }
 
 var runCommand = function() {

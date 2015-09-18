@@ -34,6 +34,55 @@ module.exports.log = function() {
     console.log.apply(console, _.toArray(arguments));
 };
 
-module.exports.prompt = function() {
-    // inquirer usage
+function Question(type, answerKey, message) {
+
+    var self = this;
+    this.type = type;
+    this.name = answerKey;
+    this.message = message;
+    this.choices = [];
+    this.validate = function(input) {
+        return true;
+    };
+
+    this.choice = function(val) {
+        self.choices.push(val);
+        return self;
+    };
+
+    this.validIf = function(fn) {
+        this.validate = fn;
+    }
+}
+
+/*
+* Wrapper for inquirer for slightly saner visual code
+*
+* usage:
+*
+* var print = require(<<this module>>);
+*
+* print.ask(
+*     print.question('list', 'favoriteColor', 'What is your fav color?')
+*        .choice('blue')
+*        .choice('green'),
+*     print.question('confirm', 'sleepy', 'Are you sleepy?')
+* ).then(function(answers) {
+*     print.log('Your favorite color is ', answers.favoriteColor);
+*     print.log('You look very ', answers.sleepy ? 'sleepy' : 'awake');
+* })
+*
+*
+* */
+module.exports.question = function(type, answerKey, message) {
+    return new Question(type, answerKey, message);
+};
+
+module.exports.ask = function(/* question args */) {
+    var questions = _.toArray(arguments);
+    return {
+        then: function(callback) {
+            question.prompt(questions, callback);
+        }
+    }
 };

@@ -5,7 +5,8 @@ var print = require('../core/print');
 module.exports = {
     colors: true,
     credentialsFileLocation: __dirname + '/credentials.js',
-    username: null
+    username: null,
+    defaultCommand: 'help'
 };
 
 if (fs.existsSync(__dirname + '/settings-override.js')) {

@@ -22,9 +22,9 @@ var complete = function() {
             } catch (e) {
                 print.fail(_s.sprintf('Writing settings failed because: %s', e && e.message));
             }
-            print.success('Settings updated.\n');
+            print.success('\nSettings updated.\n');
         } else {
-            print.info('Settings were NOT updated.\n');
+            print.info('\nSettings were NOT updated.\n');
         }
         print.success('Consider adding this to your pass profile for ease of use');
         print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'\n');
@@ -37,12 +37,15 @@ module.exports = function() {
      * */
     print.ask(
         print.question('confirm', 'colors', 'Would you like to use colored terminal output?'),
-        print.question('input', 'username', 'Please enter your jira username\n\nLeaving this blank or inaccurate may limit functionality!\n'),
+        print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.'),
         print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
             .defaultTo('help')
     ).then(function(answers) {
             settings.colors = answers.colors;
+            if (!answers.username) {
+                print.info('NOTE: Leaving your jira username blank or inaccurate will limit functionality!');
+            }
             settings.username = answers.username;
             if (!answers.credentials) {
                 print.ask(

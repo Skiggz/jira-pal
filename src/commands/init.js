@@ -10,6 +10,8 @@ var fs = require('fs');
 var settings = {};
 
 var complete = function() {
+    print.success('Consider adding this to your pass profile for ease of use');
+    print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'');
     print.log('New settings', settings);
 };
 

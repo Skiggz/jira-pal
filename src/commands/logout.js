@@ -17,3 +17,5 @@ module.exports = function() {
     * */
     fs.writeFileSync(settings.credentialsFileLocation, 'module.exports = null;');
 };
+
+module.exports.requiresLogin = false;

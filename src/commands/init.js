@@ -41,3 +41,5 @@ module.exports = function() {
             }
         });
 };
+
+module.exports.requiresLogin = false;

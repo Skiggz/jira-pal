@@ -17,17 +17,11 @@ _.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
     }
 });
 
-/*
-* Some commands to not require login, list those here
-* and it won't prompt for login if those commands are
-* specified
-* */
-
-var ANNONYMOUS_COMMANDS = [ 'login', 'logout', 'init' ];
 // default command is help, and avoids index out of bounds errors
 var command = process.argv.length > 2 ? process.argv[2] : 'help';
 
-if (ANNONYMOUS_COMMANDS.indexOf(command) === -1) {
+// commands can specify to not require login (MUST specify false though)
+if (commands[command].requiresLogin === false) {
     /*
      * Check to see if the credentials module exists, if not
      * create it.

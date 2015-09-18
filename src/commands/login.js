@@ -19,3 +19,5 @@ module.exports = function(username, password) {
     fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';\n', login));
     return login;
 };
+
+module.exports.requiresLogin = false;

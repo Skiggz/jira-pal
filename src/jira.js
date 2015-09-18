@@ -3,6 +3,7 @@ var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('./core/print');
 var settings = require('./data/settings');
+var api = require('./core/api');
 var commands = {};
 /*
 * Initialize available commands and reference them
@@ -32,3 +33,11 @@ if (creds === null) {
 } else {
     print.info('Hi there', creds);
 }
+
+/*
+ * Logged in. Now execute the command they requested
+ *
+ * Always update the http client with the current credentials
+ * */
+
+api.init(creds);

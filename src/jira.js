@@ -15,3 +15,20 @@ _.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
         print.fail(_s.sprintf('Could not load command %s because %s', name, e && e.message));
     }
 });
+
+/*
+ * Check to see if the credentials module exists, if not
+ * create it.
+ * */
+if (!fs.exists(settings.credentialsFileLocation)) {
+    print.info('Initial login, creating creds file');
+    commands.logout();
+}
+
+var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
+
+if (creds === null) {
+    print.info('You should log in');
+} else {
+    print.info('Hi there', creds);
+}

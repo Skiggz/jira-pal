@@ -140,7 +140,7 @@ function QueryBuilder() {
 }
 
 module.exports.search = function(query) {
-    return api('GET', '/rest/api/2/search', null, query.toQuery());
+    return api('POST', '/rest/api/2/search', null, query.toQuery());
 };
 
 module.exports.queryBuilder = function() {

@@ -3,6 +3,8 @@ var _ = require('underscore');
 var print = require('../core/print');
 
 module.exports = {
+    // the base url for your jira
+    url: '',
     colors: true,
     credentialsFileLocation: __dirname + '/credentials.js',
     username: null,

@@ -35,11 +35,16 @@ module.exports = function() {
      * */
     print.ask(
         print.question('confirm', 'colors', 'Would you like to use colored terminal output?'),
+        print.question('input', 'url', 'Please enter your jira domain (jira.my-domain.com)')
+                .validIf(function(input) {
+                    return input ? true : 'You must specify a domain. Do not prepend protocols, https will always be used.';
+                }),
         print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.'),
         print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
             .defaultTo('help')
     ).then(function(answers) {
+            settings.url = answers.url.replace(/\/+$/, ''); // replace trailing slashes
             settings.colors = answers.colors;
             if (!answers.username) {
                 print.info('NOTE: Leaving your jira username blank or inaccurate will limit functionality!');

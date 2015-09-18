@@ -4,18 +4,7 @@ var _s = require('underscore.string');
 var print = require('./core/print');
 var settings = require('./data/settings');
 var api = require('./core/api');
-var commands = {};
-/*
-* Initialize available commands and reference them
-* */
-_.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
-    var name = filename.replace(/\.js$/i, '');
-    try {
-        commands[name] = require(_s.sprintf('%s/commands/%s', __dirname, name));
-    } catch (e) {
-        print.fail(_s.sprintf('Could not load command %s because %s', name, e && e.message));
-    }
-});
+var commands = require('./core/commands');
 
 // default command is help, and avoids index out of bounds errors
 var command = process.argv.length > 2 ? process.argv[2] : settings.defaultCommand;

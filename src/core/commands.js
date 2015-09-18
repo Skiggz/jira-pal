@@ -8,6 +8,14 @@
 * Add a help description by adding this to the end of your module declaration
 *
 *   `module.exports.moduleDescription = 'This command will knock your socks off!';`
+*
+* Add extra help description by adding a function that prints details
+* about your command when help << your command name>> is called
+*
+* this can also be a string, and it will just print it
+*
+*   `module.exports.moduleDescriptionExtra = function() { print more stuff }`
+*   `module.exports.moduleDescriptionExtra = 'I am a longer description'`
 * */
 var fs = require('fs');
 var _ = require('underscore');

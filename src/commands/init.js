@@ -46,3 +46,11 @@ module.exports = function() {
 
 module.exports.requiresLogin = false;
 module.exports.moduleDescription = 'Prompts you to update all settings overrides you may be interested in.';
+module.exports.moduleDescriptionExtra = function() {
+    /*
+    * mostly showing that you can set a function do to stuff on help
+    * */
+    print.info('The initialization script will prompt you for various inputs ' +
+        'that update your settings-override.js for you changing various behavior ' +
+        'of the application for normal use.');
+};

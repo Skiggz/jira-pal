@@ -22,3 +22,4 @@ module.exports = function(username, password) {
 
 module.exports.requiresLogin = false;
 module.exports.moduleDescription = 'Populates base64 locally stored credentials';
+module.exports.moduleDescriptionExtra = 'Populates base64 locally stored credentials';

@@ -23,6 +23,8 @@
 
 * `colors`: If truthy, show terminal colors in output. Default `true`
 * `credentialsFileLocation`: Tells the application where to store the base64 basic auth credentials
+* `username`: Jira username. This is used for fetching YOUR assigned stories and other various tasks related to you
+  * Find this by navigating to your jira profile. The URL should look like `.../secure/ViewProfile.jspa?name=USERNAME`
 
 ##Security
 

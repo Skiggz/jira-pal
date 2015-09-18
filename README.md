@@ -19,4 +19,12 @@
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
   * Make sure your `data/settings-override.js` exports a js object with desired settings
 
+##Security
+
+* All endpoints are hit over HTTPS using Basic Authentication
+* Credentials are stored locally, and the file is not shared remotely
+* The alternative solution is to implement oauth, but since it's a terminal app I've chosen the simpler route
+* This leaves majority of security up to the user to control, if you share your local credentials file, you may have a bad time
+* On non successful auth of any endpoint call, your credentials are removed and required on next use
+
 More coming soon

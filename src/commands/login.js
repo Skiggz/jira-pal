@@ -1,6 +1,5 @@
 var _s = require('underscore.string');
 var fs = require('fs');
-var Buffer = require('buffer');
 var settings = require('../data/settings');
 /*
 * Username and Password base64 auth encoding
@@ -17,6 +16,6 @@ var settings = require('../data/settings');
 module.exports = function(username, password) {
     // store basic base64 auth creds in creds module file
     var login = new Buffer(_s.sprintf('%s:%s', username, password)).toString('base64');
-    fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';'), login);
+    fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';\n', login));
     return login;
 };

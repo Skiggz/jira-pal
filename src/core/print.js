@@ -51,11 +51,11 @@ function Question(type, answerKey, message) {
     };
 
     this.validIf = function(fn) {
-        this.validate = fn;
+        self.validate = fn;
     };
 
     this.defaultTo = function(value) {
-        this.default = value;
+        self.default = value;
     };
 }
 

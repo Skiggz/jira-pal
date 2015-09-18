@@ -10,7 +10,8 @@
     "moment": "~2.10.3",
     "numeral": "~1.5.3",
     "underscore": "~1.8.2",
-    "underscore.string": "~3.0.3"
+    "underscore.string": "~3.0.3",
+    "colors": "~1.1.2"
   },
   "main": "src/jira.js",
   "repository": "https://github.com/Skiggz/jira-pal",

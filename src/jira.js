@@ -32,7 +32,7 @@ var updateApi = function(credentials) {
 };
 
 // commands can specify to not require login (MUST specify false though)
-if (commands[command].requiresLogin === false) {
+if (commands[command].requiresLogin !== false) {
     /*
      * Check to see if the credentials module exists, if not
      * create it.

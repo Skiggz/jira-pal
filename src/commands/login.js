@@ -18,5 +18,5 @@ module.exports = function(username, password) {
     // store basic base64 auth creds in creds module file
     var login = new Buffer(_s.sprintf('%s:%s', username, password)).toString('base64');
     fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';'), login);
-
+    return login;
 };

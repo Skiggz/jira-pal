@@ -22,22 +22,29 @@ _.each(fs.readdirSync(__dirname + '/commands'), function(filename) {
  * create it.
  * */
 if (!fs.exists(settings.credentialsFileLocation)) {
-    print.info('Initial login, creating creds file');
     commands.logout();
 }
 
 var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
 
+var updateApi = function(credentials) {
+    /*
+     * Logged in. Now execute the command they requested
+     *
+     * Always update the http client with the current credentials
+     * */
+    api.init(credentials);
+};
+
 if (creds === null) {
-    print.info('You should log in');
+    print.ask(
+        print.question('input', 'username', 'JIRA Login'),
+        print.question('password', 'username', 'JIRA Password')
+    ).then(function(answer) {
+        updateApi(
+            commands.login(answer.username, answer.password)
+        );
+    });
 } else {
-    print.info('Hi there', creds);
+    updateApi(creds);
 }
-
-/*
- * Logged in. Now execute the command they requested
- *
- * Always update the http client with the current credentials
- * */
-
-api.init(creds);

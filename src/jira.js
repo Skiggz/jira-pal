@@ -37,7 +37,7 @@ if (commands[command].requiresLogin !== false) {
      * Check to see if the credentials module exists, if not
      * create it.
      * */
-    if (!fs.exists(settings.credentialsFileLocation)) {
+    if (!fs.existsSync(settings.credentialsFileLocation)) {
         commands.logout();
     }
 

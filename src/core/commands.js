@@ -1,3 +1,14 @@
+/*
+* Commands are functions that can be called from the command line
+*
+* Bypass login requirement by adding this to the end of your module declaration
+*
+*   `module.exports.requiresLogin = false;`
+*
+* Add a help description by adding this to the end of your module declaration
+*
+*   `module.exports.moduleDescription = 'This command will knock your socks off!';`
+* */
 var fs = require('fs');
 var _ = require('underscore');
 var _s = require('underscore.string');

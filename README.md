@@ -35,4 +35,9 @@
 * This leaves majority of security up to the user to control, if you share your local credentials file, you may have a bad time
 * On non successful auth of any endpoint call, your credentials are removed and required on next use
 
+##Commands
+
+* All commands are in commands folder
+* See `core/commands` for documentation about adding commands and some features that exist
+
 More coming soon

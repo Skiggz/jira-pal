@@ -3,6 +3,7 @@
 * */
 var print = require('../core/print');
 var fs = require('fs');
+var _s = require('underscore.string');
 
 /*
 * Settings to populate from responses
@@ -10,9 +11,24 @@ var fs = require('fs');
 var settings = {};
 
 var complete = function() {
-    print.success('Consider adding this to your pass profile for ease of use');
-    print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'\n');
-    print.log('New settings', settings);
+    var settingsJSON = JSON.stringify(settings, null, 2);
+    print.ask(
+        print.question('confirm', 'write', _s.sprintf('Write these settings to ../data/settings-override.js?\n\n%s\n\n', settingsJSON))
+    ).then(function(answers) {
+        if (answers.write) {
+            // write settings to file
+            try {
+                fs.writeFileSync(__dirname + '/../data/settings-override.js', _s.sprintf('module.exports = %s;\n', settingsJSON));
+            } catch (e) {
+                print.fail(_s.sprintf('Writing settings failed because: %s', e && e.message));
+            }
+            print.success('Settings updated.\n');
+        } else {
+            print.info('Settings were NOT updated.\n');
+        }
+        print.success('Consider adding this to your pass profile for ease of use');
+        print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'\n');
+    });
 };
 
 module.exports = function() {

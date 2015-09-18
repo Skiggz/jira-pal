@@ -38,8 +38,8 @@ module.exports = function() {
     print.ask(
         print.question('confirm', 'colors', 'Would you like to use colored terminal output?'),
         print.question('input', 'username', 'Please enter your jira username\n\nLeaving this blank or inaccurate may limit functionality!\n'),
-        print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?'),
-        print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.')
+        print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.'),
+        print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
             .defaultTo('help')
     ).then(function(answers) {
             settings.colors = answers.colors;
@@ -48,7 +48,7 @@ module.exports = function() {
                 print.ask(
                     print.question('input', 'filename', 'Please enter the location where you would like to store our base64 credentials')
                         .validIf(function(input) {
-                            return fs.existsSync(input) || ('File' + input + 'does not exist. Enter nothing to fallback to default.');
+                            return !input || fs.existsSync(input) || ('File' + input + 'does not exist. Enter nothing to fallback to default.');
                         })
                 ).then(function(secondAnswers) {
                         if (secondAnswers.filename) {

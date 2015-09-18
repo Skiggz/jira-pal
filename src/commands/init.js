@@ -47,6 +47,9 @@ module.exports = function() {
                 print.info('NOTE: Leaving your jira username blank or inaccurate will limit functionality!');
             }
             settings.username = answers.username;
+            if (answers.defaultCommand) {
+                settings.defaultCommand = answers.defaultCommand;
+            }
             if (!answers.credentials) {
                 print.ask(
                     print.question('input', 'filename', 'Please enter the location where you would like to store our base64 credentials')

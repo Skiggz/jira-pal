@@ -1,1 +1,3 @@
 node_modules/*
+src/data/credentials.js
+npm-debug.log

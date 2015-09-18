@@ -52,10 +52,12 @@ function Question(type, answerKey, message) {
 
     this.validIf = function(fn) {
         self.validate = fn;
+        return self;
     };
 
     this.defaultTo = function(value) {
         self.default = value;
+        return self;
     };
 }
 

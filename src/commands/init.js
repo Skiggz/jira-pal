@@ -11,7 +11,7 @@ var settings = {};
 
 var complete = function() {
     print.success('Consider adding this to your pass profile for ease of use');
-    print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'');
+    print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'\n');
     print.log('New settings', settings);
 };
 
@@ -21,7 +21,7 @@ module.exports = function() {
      * */
     print.ask(
         print.question('confirm', 'colors', 'Would you like to use colored terminal output?'),
-        print.question('input', 'username', 'Please enter your jira username\n\n    Leaving this blank or inaccurate may limit functionality!'),
+        print.question('input', 'username', 'Please enter your jira username\n\nLeaving this blank or inaccurate may limit functionality!\n'),
         print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.')
             .defaultTo('help')

@@ -26,8 +26,6 @@ var complete = function() {
         } else {
             print.info('\nSettings were NOT updated.\n');
         }
-        print.success('Consider adding this to your pass profile for ease of use');
-        print.success('\n\talias jira=\'/abs/path/to/node /abs/path/to/src/jira.js\'\n');
     });
 };
 

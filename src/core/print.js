@@ -106,7 +106,7 @@ module.exports.table = function(header, rows, options) {
         _.each(rows, function(row) {
             thinRows.push(row);
         });
-        module.exports.log(cliff.stringifyRows(rows, options.colors));
+        module.exports.log(cliff.stringifyRows(thinRows, options.colors));
     } else {
         var tableOptions = {
             head: header

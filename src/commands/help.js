@@ -33,7 +33,7 @@ module.exports = function() {
         colWidths: [ 30, 120 ]
     });
     _.each(commands, function(mod, command) {
-        table.push([command, mod.moduleDescription]);
+        table.push([command || '', mod.moduleDescription || '']);
     });
     print.info('Thanks for using JIRA Pal, available commands are:');
     print.log(table.toString());

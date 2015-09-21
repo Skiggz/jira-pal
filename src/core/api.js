@@ -70,29 +70,32 @@ function QueryBuilder() {
     };
 
     this.search = {
-        query: function(query) {
-            self.query.jql = _s.sprintf('%s %s ', self.query.jql, query);
+        query: function() {
             return self;
+        },
+        raw: function(query) {
+            self.query.jql = _s.sprintf('%s %s ', self.query.jql, query);
+            return self.search;
         },
         and: function(subQuery) {
             self.query.jql = _s.sprintf('%s and %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         or: function(subQuery) {
             self.query.jql = _s.sprintf('%s or %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         not: function(subQuery) {
             self.query.jql = _s.sprintf('%s not %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         empty: function(field) {
             self.query.jql = _s.sprintf('%s %s is empty ', self.query.jql, field);
-            return self;
+            return self.search;
         },
         nil: function(field) {
             self.query.jql = _s.sprintf('%s %s is null ', self.query.jql, field);
-            return self;
+            return self.search;
         },
         orderBy: function(field, priority) {
             if (priority) {
@@ -101,226 +104,226 @@ function QueryBuilder() {
             } else {
                 self.query.jql = _s.sprintf('%s order by %s ', self.query.jql, field);
             }
-            return self;
+            return self.search;
         },
         // operators
         equals: function(subQuery) {
             self.query.jql = _s.sprintf('%s = %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         notEquals: function(subQuery) {
             self.query.jql = _s.sprintf('%s != %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         greaterThan: function(subQuery) {
             self.query.jql = _s.sprintf('%s > %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         greaterThanEquals: function(subQuery) {
             self.query.jql = _s.sprintf('%s >= %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         lessThan: function(subQuery) {
             self.query.jql = _s.sprintf('%s < %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         lessThanEquals: function(subQuery) {
             self.query.jql = _s.sprintf('%s <= %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         in: function(subQuery) {
             self.query.jql = _s.sprintf('%s in %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         notIn: function(subQuery) {
             self.query.jql = _s.sprintf('%s not in %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         contains: function(subQuery) {
             self.query.jql = _s.sprintf('%s ~ %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         is: function(subQuery) {
             self.query.jql = _s.sprintf('%s is %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         isNot: function(subQuery) {
             self.query.jql = _s.sprintf('%s is not %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         was: function(subQuery) {
             self.query.jql = _s.sprintf('%s was %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         wasIn: function(subQuery) {
             self.query.jql = _s.sprintf('%s was in %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         wasNotIn: function(subQuery) {
             self.query.jql = _s.sprintf('%s was not in %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         wasNot: function(subQuery) {
             self.query.jql = _s.sprintf('%s was not %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         changed: function(subQuery) {
             self.query.jql = _s.sprintf('%s changed %s ', self.query.jql, subQuery);
-            return self;
+            return self.search;
         },
         // fields
         fields: {
             affectedVersion: function() {
                 self.query.jql = _s.sprintf('%s affectedVersion ', self.query.jql);
-                return self;
+                return self.search;
             },
             assignee: function() {
                 self.query.jql = _s.sprintf('%s assignee ', self.query.jql);
-                return self;
+                return self.search;
             },
             attachments: function() {
                 self.query.jql = _s.sprintf('%s attachments ', self.query.jql);
-                return self;
+                return self.search;
             },
             category: function() {
                 self.query.jql = _s.sprintf('%s category ', self.query.jql);
-                return self;
+                return self.search;
             },
             comment: function() {
                 self.query.jql = _s.sprintf('%s comment ', self.query.jql);
-                return self;
+                return self.search;
             },
             component: function() {
                 self.query.jql = _s.sprintf('%s component ', self.query.jql);
-                return self;
+                return self.search;
             },
             created: function() {
                 self.query.jql = _s.sprintf('%s created ', self.query.jql);
-                return self;
+                return self.search;
             },
             creator: function() {
                 self.query.jql = _s.sprintf('%s creator ', self.query.jql);
-                return self;
+                return self.search;
             },
             customField: function() {
                 self.query.jql = _s.sprintf('%s customField ', self.query.jql);
-                return self;
+                return self.search;
             },
             description: function() {
                 self.query.jql = _s.sprintf('%s description ', self.query.jql);
-                return self;
+                return self.search;
             },
             due: function() {
                 self.query.jql = _s.sprintf('%s due ', self.query.jql);
-                return self;
+                return self.search;
             },
             environment: function() {
                 self.query.jql = _s.sprintf('%s environment ', self.query.jql);
-                return self;
+                return self.search;
             },
             epicLink: function() {
                 self.query.jql = _s.sprintf('%s epicLink ', self.query.jql);
-                return self;
+                return self.search;
             },
             filter: function() {
                 self.query.jql = _s.sprintf('%s filter ', self.query.jql);
-                return self;
+                return self.search;
             },
             fixVersion: function() {
                 self.query.jql = _s.sprintf('%s fixVersion ', self.query.jql);
-                return self;
+                return self.search;
             },
             issueKey: function() {
                 self.query.jql = _s.sprintf('%s issueKey ', self.query.jql);
-                return self;
+                return self.search;
             },
             lastViewed: function() {
                 self.query.jql = _s.sprintf('%s lastViewed ', self.query.jql);
-                return self;
+                return self.search;
             },
             level: function() {
                 self.query.jql = _s.sprintf('%s level ', self.query.jql);
-                return self;
+                return self.search;
             },
             originalEstimate: function() {
                 self.query.jql = _s.sprintf('%s originalEstimate ', self.query.jql);
-                return self;
+                return self.search;
             },
             parent: function() {
                 self.query.jql = _s.sprintf('%s parent ', self.query.jql);
-                return self;
+                return self.search;
             },
             priority: function() {
                 self.query.jql = _s.sprintf('%s priority ', self.query.jql);
-                return self;
+                return self.search;
             },
             project: function() {
                 self.query.jql = _s.sprintf('%s project ', self.query.jql);
-                return self;
+                return self.search;
             },
             remainingEstimate: function() {
                 self.query.jql = _s.sprintf('%s remainingEstimate ', self.query.jql);
-                return self;
+                return self.search;
             },
             reporter: function() {
                 self.query.jql = _s.sprintf('%s reporter ', self.query.jql);
-                return self;
+                return self.search;
             },
             resolution: function() {
                 self.query.jql = _s.sprintf('%s resolution ', self.query.jql);
-                return self;
+                return self.search;
             },
             resolved: function() {
                 self.query.jql = _s.sprintf('%s resolved ', self.query.jql);
-                return self;
+                return self.search;
             },
             sprint: function() {
                 self.query.jql = _s.sprintf('%s sprint ', self.query.jql);
-                return self;
+                return self.search;
             },
             status: function() {
                 self.query.jql = _s.sprintf('%s status ', self.query.jql);
-                return self;
+                return self.search;
             },
             summary: function() {
                 self.query.jql = _s.sprintf('%s summary ', self.query.jql);
-                return self;
+                return self.search;
             },
             text: function() {
                 self.query.jql = _s.sprintf('%s text ', self.query.jql);
-                return self;
+                return self.search;
             },
             type: function() {
                 self.query.jql = _s.sprintf('%s type ', self.query.jql);
-                return self;
+                return self.search;
             },
             timeSpent: function() {
                 self.query.jql = _s.sprintf('%s timeSpent ', self.query.jql);
-                return self;
+                return self.search;
             },
             updated: function() {
                 self.query.jql = _s.sprintf('%s updated ', self.query.jql);
-                return self;
+                return self.search;
             },
             voter: function() {
                 self.query.jql = _s.sprintf('%s voter ', self.query.jql);
-                return self;
+                return self.search;
             },
             votes: function() {
                 self.query.jql = _s.sprintf('%s votes ', self.query.jql);
-                return self;
+                return self.search;
             },
             watcher: function() {
                 self.query.jql = _s.sprintf('%s watcher ', self.query.jql);
-                return self;
+                return self.search;
             },
             watchers: function() {
                 self.query.jql = _s.sprintf('%s watchers ', self.query.jql);
-                return self;
+                return self.search;
             },
             workRatio: function() {
                 self.query.jql = _s.sprintf('%s workRatio ', self.query.jql);
-                return self;
+                return self.search;
             }
         }
     };
@@ -360,7 +363,7 @@ function QueryBuilder() {
 }
 
 module.exports.search = function(query) {
-    return api('POST', '/rest/api/2/search', null, query.toQuery());
+    return api('POST', '/rest/api/2/search', null, query.query().toQuery());
 };
 
 module.exports.queryBuilder = function() {

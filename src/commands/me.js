@@ -9,8 +9,7 @@ var print = require('../core/print');
 var JiraIssue = require('../models/issue');
 module.exports = function() {
     api.search(
-        api.queryBuilder()
-            .search.query(_s.sprintf('assignee = %s', settings.username))
+        api.queryBuilder().search.fields.assignee().equals(settings.username)
     ).then(function(response) {
         _.each(JSON.parse(response.payload).issues, function(issueJson) {
             print.log(

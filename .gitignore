@@ -2,3 +2,4 @@ node_modules/*
 src/data/credentials.js
 src/data/settings-override.js
 npm-debug.log
+src/cache/*.*

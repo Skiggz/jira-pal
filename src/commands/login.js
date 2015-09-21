@@ -1,6 +1,8 @@
 var _s = require('underscore.string');
 var fs = require('fs');
 var settings = require('../data/settings');
+var print = require('../core/print');
+var Promise = require('bluebird');
 /*
 * Username and Password base64 auth encoding
 * is stored in the credentials file and used
@@ -13,11 +15,17 @@ var settings = require('../data/settings');
 * silly developers from accidentally pushing
 * credentials in a PR or fork as well.
 * */
-module.exports = function(username, password) {
-    // store basic base64 auth creds in creds module file
-    var login = new Buffer(_s.sprintf('%s:%s', username, password)).toString('base64');
-    fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';\n', login));
-    return login;
+module.exports = function() {
+    return new Promise(function(resolve) {
+        print.ask(
+            print.question('input', 'username', 'JIRA Login'),
+            print.question('password', 'password', 'JIRA Password')
+        ).then(function(answer) {
+            var login = new Buffer(_s.sprintf('%s:%s', answer.username, answer.password)).toString('base64');
+            fs.writeFileSync(settings.credentialsFileLocation, _s.sprintf('module.exports = \'%s\';\n', login));
+            resolve(login);
+        });
+    });
 };
 
 module.exports.requiresLogin = false;

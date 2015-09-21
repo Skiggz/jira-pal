@@ -44,14 +44,9 @@ if (commands[command].requiresLogin !== false) {
     var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
 
     if (creds === null) {
-        print.ask(
-            print.question('input', 'username', 'JIRA Login'),
-            print.question('password', 'username', 'JIRA Password')
-        ).then(function(answer) {
-                updateApi(
-                    commands.login(answer.username, answer.password)
-                );
-            });
+        commands.login().then(function(newCreds) {
+            updateApi(newCreds);
+        }, _.noop);
     } else {
         updateApi(creds);
     }

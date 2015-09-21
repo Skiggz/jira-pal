@@ -21,7 +21,7 @@ function api(method, path, headers, data) {
         headers = headers || {};
         // if creds are set, set authorization
         if (creds) {
-            headers['Authorization'] = _s.sprintf('Basic: %s', creds);
+            headers['Authorization'] = _s.sprintf('Basic %s', creds);
         }
         // All of JIRAs apis are application json, if data, set type
         headers['Content-Type'] = 'application/json';

@@ -66,7 +66,21 @@ function QueryBuilder() {
         jql: '',
         startAt: 0,
         maxResults: 10,
-        fields: ['summary', 'issuetype']
+        fields: [
+            'summary',
+            'issuetype',
+            'project',
+            'resolution',
+            'resolutiondate',
+            'creator',
+            'reporter',
+            'priority',
+            'labels',
+            'votes',
+            'assignee',
+            'status',
+            'updated'
+        ]
     };
 
     this.search = {

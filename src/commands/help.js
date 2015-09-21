@@ -1,7 +1,6 @@
 var print = require('../core/print');
 var _ = require('underscore');
 var _s = require('underscore.string');
-var Table = require('cli-table');
 
 module.exports = function() {
     // async include of commands (circular dependency)
@@ -28,15 +27,14 @@ module.exports = function() {
             print.fail(_s.sprintf('%s command not exist', specificCommand));
         }
     }
-    var table = new Table({
-        head: [ 'Command', 'Description' ],
-        colWidths: [ 30, 120 ]
-    });
-    _.each(commands, function(mod, command) {
-        table.push([command || '', mod.moduleDescription || '']);
-    });
     print.info('Thanks for using JIRA Pal, available commands are:');
-    print.log(table.toString());
+    var rows = [];
+    _.each(commands, function(mod, command) {
+        rows.push([command || '', mod.moduleDescription || '']);
+    });
+    print.table([ 'Command', 'Description' ], rows, {
+        widths: [ 30, 120 ]
+    });
     print.info('Use [node src/jira.js help command-name] to get more details on certain commands\n');
     print.info('\tExample: jira help login\n');
 };

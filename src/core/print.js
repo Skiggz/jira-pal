@@ -2,6 +2,10 @@ var settings = require('../data/settings');
 var question = require('inquirer');
 var _ = require('underscore');
 var colors = require('colors/safe');
+// cliff tables are smaller and easier to display heavier data sets
+var cliff = require('cliff');
+// bigger tables
+var Table = require('cli-table');
 /*
 * Controls the stdout and user interface
 * Respects various settings configs
@@ -90,5 +94,30 @@ module.exports.ask = function(/* question args */) {
         then: function(callback) {
             question.prompt(questions, callback);
         }
+    }
+};
+
+/*
+* Big and small table outputs via options
+* */
+module.exports.table = function(header, rows, options) {
+    if (options.thin) {
+        var thinRows = [header];
+        _.each(rows, function(row) {
+            thinRows.push(row);
+        });
+        module.exports.log(cliff.stringifyRows(rows, options.colors));
+    } else {
+        var tableOptions = {
+            head: header
+        };
+        if (options.widths) {
+            tableOptions.colWidths = options.widths;
+        }
+        var table = new Table(tableOptions);
+        _.each(rows, function(row) {
+            table.push(row);
+        });
+        module.exports.log(table.toString());
     }
 };

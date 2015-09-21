@@ -185,6 +185,45 @@ function QueryBuilder() {
             self.query.jql = _s.sprintf('%s changed %s ', self.query.jql, subQuery);
             return self.search;
         },
+        // jira search functions
+        time: {
+            now: function() {
+                self.query.jql = _s.sprintf('%s now() ', self.query.jql);
+                return self.search;
+            },
+            startOfDay: function() {
+                self.query.jql = _s.sprintf('%s startOfDay() ', self.query.jql);
+                return self.search;
+            },
+            startOfWeek: function() {
+                self.query.jql = _s.sprintf('%s startOfWeek() ', self.query.jql);
+                return self.search;
+            },
+            startOfMonth: function() {
+                self.query.jql = _s.sprintf('%s startOfMonth() ', self.query.jql);
+                return self.search;
+            },
+            startOfYear: function() {
+                self.query.jql = _s.sprintf('%s startOfYear() ', self.query.jql);
+                return self.search;
+            },
+            endOfDay: function() {
+                self.query.jql = _s.sprintf('%s endOfDay() ', self.query.jql);
+                return self.search;
+            },
+            endOfWeek: function() {
+                self.query.jql = _s.sprintf('%s endOfWeek() ', self.query.jql);
+                return self.search;
+            },
+            endOfMonth: function() {
+                self.query.jql = _s.sprintf('%s endOfMonth() ', self.query.jql);
+                return self.search;
+            },
+            endOfYear: function() {
+                self.query.jql = _s.sprintf('%s endOfYear() ', self.query.jql);
+                return self.search;
+            }
+        },
         // fields
         fields: {
             affectedVersion: function() {

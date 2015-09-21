@@ -102,6 +102,71 @@ function QueryBuilder() {
                 self.query.jql = _s.sprintf('%s order by %s ', self.query.jql, field);
             }
             return self;
+        },
+        // operators
+        equals: function(subQuery) {
+            self.query.jql = _s.sprintf('%s = %s ', self.query.jql, subQuery);
+            return self;
+        },
+        notEquals: function(subQuery) {
+            self.query.jql = _s.sprintf('%s != %s ', self.query.jql, subQuery);
+            return self;
+        },
+        greaterThan: function(subQuery) {
+            self.query.jql = _s.sprintf('%s > %s ', self.query.jql, subQuery);
+            return self;
+        },
+        greaterThanEquals: function(subQuery) {
+            self.query.jql = _s.sprintf('%s >= %s ', self.query.jql, subQuery);
+            return self;
+        },
+        lessThan: function(subQuery) {
+            self.query.jql = _s.sprintf('%s < %s ', self.query.jql, subQuery);
+            return self;
+        },
+        lessThanEquals: function(subQuery) {
+            self.query.jql = _s.sprintf('%s <= %s ', self.query.jql, subQuery);
+            return self;
+        },
+        in: function(subQuery) {
+            self.query.jql = _s.sprintf('%s in %s ', self.query.jql, subQuery);
+            return self;
+        },
+        notIn: function(subQuery) {
+            self.query.jql = _s.sprintf('%s not in %s ', self.query.jql, subQuery);
+            return self;
+        },
+        contains: function(subQuery) {
+            self.query.jql = _s.sprintf('%s ~ %s ', self.query.jql, subQuery);
+            return self;
+        },
+        is: function(subQuery) {
+            self.query.jql = _s.sprintf('%s is %s ', self.query.jql, subQuery);
+            return self;
+        },
+        isNot: function(subQuery) {
+            self.query.jql = _s.sprintf('%s is not %s ', self.query.jql, subQuery);
+            return self;
+        },
+        was: function(subQuery) {
+            self.query.jql = _s.sprintf('%s was %s ', self.query.jql, subQuery);
+            return self;
+        },
+        wasIn: function(subQuery) {
+            self.query.jql = _s.sprintf('%s was in %s ', self.query.jql, subQuery);
+            return self;
+        },
+        wasNotIn: function(subQuery) {
+            self.query.jql = _s.sprintf('%s was not in %s ', self.query.jql, subQuery);
+            return self;
+        },
+        wasNot: function(subQuery) {
+            self.query.jql = _s.sprintf('%s was not %s ', self.query.jql, subQuery);
+            return self;
+        },
+        changed: function(subQuery) {
+            self.query.jql = _s.sprintf('%s changed %s ', self.query.jql, subQuery);
+            return self;
         }
     };
 

@@ -4,6 +4,7 @@
 var print = require('../core/print');
 var fs = require('fs');
 var _s = require('underscore.string');
+var cacheCommand = require('../commands/prime');
 
 /*
 * Settings to populate from responses
@@ -13,12 +14,18 @@ var settings = {};
 var complete = function() {
     var settingsJSON = JSON.stringify(settings, null, 2);
     print.ask(
-        print.question('confirm', 'write', _s.sprintf('Write these settings to ../data/settings-override.js?\n\n%s\n\n', settingsJSON))
+        print.question(
+            'confirm',
+            'write',
+            _s.sprintf('Write these settings to ../data/settings-override.js?\n\n%s\n\n', settingsJSON)
+        )
     ).then(function(answers) {
         if (answers.write) {
             // write settings to file
             try {
-                fs.writeFileSync(__dirname + '/../data/settings-override.js', _s.sprintf('module.exports = %s;\n', settingsJSON));
+                fs.writeFileSync(
+                    __dirname + '/../data/settings-override.js', _s.sprintf('module.exports = %s;\n', settingsJSON)
+                );
             } catch (e) {
                 print.fail(_s.sprintf('Writing settings failed because: %s', e && e.message));
             }
@@ -26,6 +33,28 @@ var complete = function() {
         } else {
             print.info('\nSettings were NOT updated.\n');
         }
+        /*
+        * Last but not least, ask them if they would like to pull down data from jira
+        * This will help speed up all future calls.
+        * */
+        print.ask(
+            print.question(
+                'confirm',
+                'cache',
+                'Would you like to prime all of your local caches for JIRA information (statuses, fields, etc..)?'
+            )
+        ).then(
+            function(answers) {
+                if (answers.cache) {
+                    // run cache job
+                    cacheCommand();
+                } else {
+                    print.info('Cache was not primed. Some calls may be slow until caches are filled. ' +
+                        'To prime caches at any time, run jira prime. ' +
+                        'You can also invalidate the caches by running jira evict.');
+                }
+            }
+        );
     });
 };
 

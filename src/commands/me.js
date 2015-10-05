@@ -39,7 +39,7 @@ module.exports = function() {
                 [
                     issue.key,
                     colorType(issue),
-                    issue.summary(),
+                    colors.green(issue.summary()),
                     issue.status()
                 ]);
         });

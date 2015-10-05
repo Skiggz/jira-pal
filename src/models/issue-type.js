@@ -23,7 +23,7 @@ module.exports = function JiraIssueType(dataObject) {
     };
 
     this.isFeature = function() {
-        return self.name === 'Story';
+        return self.name === 'Story' || self.name === 'New Feature';
     };
 
 };

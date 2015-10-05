@@ -91,12 +91,12 @@ function QueryBuilder() {
             self.query.jql = _s.sprintf('%s %s ', self.query.jql, query);
             return self.search;
         },
-        and: function(subQuery) {
-            self.query.jql = _s.sprintf('%s and %s ', self.query.jql, subQuery);
+        and: function() {
+            self.query.jql = _s.sprintf('%s and ', self.query.jql);
             return self.search;
         },
-        or: function(subQuery) {
-            self.query.jql = _s.sprintf('%s or %s ', self.query.jql, subQuery);
+        or: function() {
+            self.query.jql = _s.sprintf('%s or ', self.query.jql);
             return self.search;
         },
         not: function(subQuery) {

@@ -37,10 +37,11 @@ module.exports = function() {
                 [
                     issue.key,
                     colorType(issue),
-                    issue.summary()
+                    issue.summary(),
+                    issue.status()
                 ]);
         });
-        print.table([ 'ID', 'Type', 'Summary' ], rows, {
+        print.table([ 'ID', 'Type', 'Summary', 'Status' ], rows, {
             thin: true,
             colors: ['blue']
         });

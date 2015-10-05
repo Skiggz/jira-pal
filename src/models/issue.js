@@ -24,6 +24,13 @@ module.exports = function JiraIssue(dataObject) {
         return '';
     };
 
+    this.status = function() {
+        if (self.fields && self.fields.status) {
+            return self.fields.status.name;
+        }
+        return '?';
+    };
+
     this.isBug = function() {
         return self.fields && self.fields.issuetype && self.fields && self.fields.issuetype.isBug();
     };

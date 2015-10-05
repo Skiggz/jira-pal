@@ -25,8 +25,8 @@ var colorType = function(issue) {
 
 module.exports = function() {
     var query = api.queryBuilder().search.fields.assignee().equals(settings.username);
-    if (settings.defaultMeStatus) {
-        query.and().fields.status().in(settings.defaultMeStatus);
+    if (settings.defaultMeStatuses) {
+        query.and().fields.status().in(settings.defaultMeStatuses);
     }
     api.search(query).then(function(response) {
         var issues = [];

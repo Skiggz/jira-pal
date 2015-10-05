@@ -1,13 +1,11 @@
 /*
 * Pull down my stories
 * */
-var api = require('../core/api');
-var settings = require('../data/settings');
 var _s = require('underscore.string');
 var _ = require('underscore');
 var print = require('../core/print');
-var JiraIssue = require('../models/issue');
 var colors = require('colors/safe');
+var getIssues = require('../util/issues');
 
 var colorType = function(issue) {
     if (issue.isBug()) {
@@ -24,15 +22,7 @@ var colorType = function(issue) {
 };
 
 module.exports = function() {
-    var query = api.queryBuilder().search.fields.assignee().equals(settings.username);
-    if (settings.defaultMeStatuses) {
-        query.and().fields.status().in(settings.defaultMeStatuses);
-    }
-    api.search(query).then(function(response) {
-        var issues = [];
-        _.each(JSON.parse(response.payload).issues, function(issueJson) {
-            issues.push(new JiraIssue(issueJson));
-        });
+    getIssues().then(function(issues) {
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

@@ -149,7 +149,9 @@ function QueryBuilder() {
             if (!(items instanceof Array)) {
                 items = [items];
             }
-            self.query.jql = _s.sprintf('%s in (%s) ', self.query.jql, items.join(','));
+            self.query.jql = _s.sprintf('%s in (%s) ', self.query.jql, _.map(items, function(item) {
+                return '"' + item + '"';
+            }).join(','));
             return self.search;
         },
         notIn: function(subQuery) {

@@ -24,9 +24,11 @@ var colorType = function(issue) {
 };
 
 module.exports = function() {
-    api.search(
-        api.queryBuilder().search.fields.assignee().equals(settings.username)
-    ).then(function(response) {
+    var query = api.queryBuilder().search.fields.assignee().equals(settings.username);
+    if (settings.defaultMeStatus) {
+        query.and().fields.status().in(settings.defaultMeStatus);
+    }
+    api.search(query).then(function(response) {
         var issues = [];
         _.each(JSON.parse(response.payload).issues, function(issueJson) {
             issues.push(new JiraIssue(issueJson));

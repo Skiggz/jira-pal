@@ -70,6 +70,7 @@ module.exports = function() {
                 }),
         print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.'),
+        print.question('input', 'defaultMeStatus', 'Input a default status for jira me command').defaultTo('In Progress'),
         print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
             .defaultTo('help')
     ).then(function(answers) {
@@ -81,6 +82,9 @@ module.exports = function() {
             settings.username = answers.username;
             if (answers.defaultCommand) {
                 settings.defaultCommand = answers.defaultCommand;
+            }
+            if (answers.defaultMeStatus) {
+                settings.defaultMeStatus = answers.defaultMeStatus;
             }
             if (!answers.credentials) {
                 print.ask(

@@ -8,7 +8,8 @@ module.exports = {
     colors: true,
     credentialsFileLocation: __dirname + '/credentials.js',
     username: null,
-    defaultCommand: 'help'
+    defaultCommand: 'help',
+    defaultMeStatus: 'In Progress'
 };
 
 if (fs.existsSync(__dirname + '/settings-override.js')) {

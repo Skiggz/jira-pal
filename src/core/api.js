@@ -145,8 +145,11 @@ function QueryBuilder() {
             self.query.jql = _s.sprintf('%s <= %s ', self.query.jql, subQuery);
             return self.search;
         },
-        in: function(subQuery) {
-            self.query.jql = _s.sprintf('%s in %s ', self.query.jql, subQuery);
+        in: function(items) {
+            if (!(items instanceof Array)) {
+                items = [items];
+            }
+            self.query.jql = _s.sprintf('%s in (%s) ', self.query.jql, items.join(','));
             return self.search;
         },
         notIn: function(subQuery) {

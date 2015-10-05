@@ -419,6 +419,10 @@ module.exports.search = function(query) {
     return api('POST', '/rest/api/2/search', null, query.query().toQuery());
 };
 
+module.exports.statuses = function() {
+    return api('GET', '/rest/api/2/status');
+};
+
 module.exports.queryBuilder = function() {
     return new QueryBuilder();
 };

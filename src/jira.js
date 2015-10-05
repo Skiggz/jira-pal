@@ -22,7 +22,7 @@ var args = {
     length: process.argv.length - 2
 };
 for (var i = 3; i < process.argv.length; i++) {
-    args[i] = process.argv[i];
+    args[i - 3] = process.argv[i];
 }
 
 var runCommand = function() {

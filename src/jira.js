@@ -19,7 +19,7 @@ if (!commands[command]) {
 * node and the script call
 * */
 var args = {
-    length: process.argv.length - 2
+    length: process.argv.length - 3
 };
 for (var i = 3; i < process.argv.length; i++) {
     args[i - 3] = process.argv[i];

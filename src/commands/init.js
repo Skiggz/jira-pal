@@ -4,6 +4,7 @@
 var print = require('../core/print');
 var fs = require('fs');
 var _s = require('underscore.string');
+var _ = require('underscore');
 var cacheCommand = require('../commands/prime');
 
 /*
@@ -84,7 +85,9 @@ module.exports = function() {
                 settings.defaultCommand = answers.defaultCommand;
             }
             if (answers.defaultMeStatuses) {
-                settings.defaultMeStatuses = answers.defaultMeStatuses.split(',');
+                settings.defaultMeStatuses = _.map(answers.defaultMeStatuses.split(','), function(status) {
+                    return _s.trim(status);
+                });
             }
             if (!answers.credentials) {
                 print.ask(

@@ -4,6 +4,10 @@ var clipboard = require("copy-paste");
 
 module.exports = function(args) {
     selectIssue(args).then(function(issue) {
+        if (!issue) {
+            print.info('No stories matched your search criteria');
+            return;
+        }
         clipboard.copy(issue.key, function() {
             print.info('Copied story ID ' + issue.key + ' to your clipboard.');
         });

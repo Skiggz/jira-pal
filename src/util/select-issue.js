@@ -4,9 +4,9 @@ var _ = require('underscore');
 var print = require('../core/print');
 var _s = require('underscore.string');
 
-module.exports = function() {
+module.exports = function(args) {
     return new Promise(function(resolve, reject) {
-        getIssues().then(function(issues) {
+        getIssues(args).then(function(issues) {
             var q = print.question('list', 'story', 'Select a story to copy the ID for');
             _.each(issues, function(issue) {
                 q.choice(issue.key + ': ' + issue.summary());

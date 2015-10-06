@@ -1,6 +1,11 @@
 var print = require('../core/print');
+var statuses = require('../data/jira/statuses');
 module.exports = function() {
-    print.info('I do not do anything yet!');
+    statuses.list().then(function() {
+        print.success('Primed statuses cache');
+    }, function(e) {
+        print.fail('Priming statues cache failed. ' + e ? e.message : '');
+    });
 };
 
 module.exports.requiresLogin = false;

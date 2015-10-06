@@ -69,8 +69,8 @@ module.exports = function() {
                     return input ? true : 'You must specify a domain. Do not prepend protocols, https will always be used.';
                 }),
         print.question('input', 'username', 'Please enter your jira username (optional)'),
-        print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default.'),
-        print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress,Started'),
+        print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default. (Suggested: me)'),
+        print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress'),
         print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
             .defaultTo('help')
     ).then(function(answers) {

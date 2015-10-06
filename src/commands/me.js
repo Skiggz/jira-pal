@@ -42,3 +42,5 @@ module.exports = function() {
         throw error;
     });
 };
+
+module.exports.moduleDescription = 'Lists your stories based on your defaultMeStatuses setting. Run init to set this.';

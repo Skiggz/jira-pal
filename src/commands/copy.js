@@ -15,3 +15,5 @@ module.exports = function(args) {
         print.fail('Failed to fetch issues ' + e ? e.message : '');
     });
 };
+
+module.exports.moduleDescription = 'Copy a selected story key (id) to your clipboard';

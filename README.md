@@ -1,6 +1,6 @@
 #Jira Pal
 
-####Jira UI struggles enough, but even if it work it's a UI!!! #terminalftw
+####Jira UI can be a bit busy sometimes. This tool aims to simplify jira use for terminal users
 
 ##Installation
 
@@ -22,10 +22,13 @@
   
 ###Current Settings Options
 
+* `url`: The url for your jira installation. `Required`
 * `colors`: If truthy, show terminal colors in output. Default `true`
 * `credentialsFileLocation`: Tells the application where to store the base64 basic auth credentials
 * `username`: Jira username. This is used for fetching YOUR assigned stories and other various tasks related to you
   * Find this by navigating to your jira profile. The URL should look like `.../secure/ViewProfile.jspa?name=USERNAME`
+* `defaultCommand`: The default command that runs when you run `node jira.js`. Default `help`. Suggested `me`.
+* `defaultMeStatuses`: The statuses to include in your `me` search. Default `In Progress`. This is a CSV. (Ex: `Foo Status,Done,My Status`)
 
 ##Security
 

@@ -18,7 +18,7 @@ module.exports = function(args) {
             for (var i = 0; i < args.length; i++) {
                 search += ' ' + args[i];
             }
-            query.raw(search);
+            query.fields.text().contains(search);
         }
         api.search(query).then(function(response) {
             var issues = [];

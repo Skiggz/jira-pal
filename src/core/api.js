@@ -159,7 +159,7 @@ function QueryBuilder() {
             return self.search;
         },
         contains: function(subQuery) {
-            self.query.jql = _s.sprintf('%s ~ %s ', self.query.jql, subQuery);
+            self.query.jql = _s.sprintf('%s ~ "%s" ', self.query.jql, subQuery);
             return self.search;
         },
         is: function(subQuery) {

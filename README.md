@@ -9,6 +9,11 @@
 * Run `npm install jira-pal --global`
 * Run commands. Suggested initial command `node jira.js init`
 
+Notes about manual installation
+
+* If you pull down this repo to use this manually, you may want to add an alias to your environment
+  * Bash example: `alias jira='node /path/to/this/repo/src/jira.js'`
+
 ##Usage
 
 * `jira`

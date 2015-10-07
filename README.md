@@ -7,6 +7,7 @@
 * Install `node` if you do not have it
 * Install `npm` if applicable
 * Run `npm install jira-pal --global`
+  * I suggest aliasing this to something easy to type (I used `jira`)
 * Run commands. Suggested initial command `node jira.js init`
 
 Notes about manual installation
@@ -16,7 +17,7 @@ Notes about manual installation
 
 ##Usage
 
-* `jira`
+* `jira-pal <command> <options`
 
 ##Settings
 

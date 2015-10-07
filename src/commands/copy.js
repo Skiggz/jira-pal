@@ -1,6 +1,6 @@
 var print = require('../core/print');
 var selectIssue = require('../util/select-issue');
-var clipboard = require("copy-paste");
+var clipboard = require("copy-paste-no-exec");
 
 module.exports = function(args) {
     selectIssue(args).then(function(issue) {

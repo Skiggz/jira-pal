@@ -1,14 +1,11 @@
+var _ = require('underscore');
 var print = require('../core/print');
 var selectIssue = require('../util/select-issue');
 var clipboard = require("copy-paste-no-exec");
-var meQuery = require('../util/me-query');
+var meQueryOrSearch = require('../util/me-query-or-search');
 
-module.exports = function(args) {
-    if (args.length === 0) {
-        args[0] = meQuery.toQuery();
-        args.length = 1;
-    }
-    selectIssue(args).then(function(issue) {
+module.exports = function() {
+    selectIssue(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(issue) {
         if (!issue) {
             print.info('No stories matched your search criteria');
             return;

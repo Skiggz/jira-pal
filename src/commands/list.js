@@ -1,10 +1,10 @@
 var statuses = require('../data/jira/statuses');
 var print = require('../core/print');
 
-module.exports = function(args) {
+module.exports = function() {
 
-    if (args.length > 0) {
-        if (args[0].toLowerCase()[0] === 's') {
+    if (arguments.length > 0) {
+        if (arguments[0].toLowerCase()[0] === 's') {
             statuses.display();
         }
     } else {

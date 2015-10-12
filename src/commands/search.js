@@ -6,9 +6,11 @@ var _ = require('underscore');
 var print = require('../core/print');
 var colors = require('colors/safe');
 var getIssues = require('../util/issues');
+var meQueryOrSearch = require('../util/me-query-or-search');
+var api = require('../core/api');
 
-module.exports = function(args) {
-    getIssues(args).then(function(issues) {
+module.exports = function() {
+    getIssues(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(issues) {
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

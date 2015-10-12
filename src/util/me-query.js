@@ -6,5 +6,5 @@ module.exports = function() {
     if (settings.defaultMeStatuses) {
         query.and().fields.status().in(settings.defaultMeStatuses);
     }
-    return query.query();
+    return query;
 };

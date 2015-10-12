@@ -1,17 +1,19 @@
 /*
 * Pull down my stories
 * */
-var _s = require('underscore.string');
 var _ = require('underscore');
 var settings = require('../data/settings');
-var api = require('../core/api');
 var print = require('../core/print');
+var colors = require('colors/safe');
 var getIssues = require('../util/issues');
-var meQuery = require('../util/me-query');
+var meQueryOrSearch = require('../util/me-query-or-search');
 
 module.exports = function() {
-    var query = meQuery();
-    getIssues(query.toQuery()).then(function(issues) {
+    var query = meQueryOrSearch.apply(this, _.toArray(arguments));
+    if (arguments.length > 0) {
+        query = query.and().fields.assignee().equals(settings.username);
+    }
+    getIssues(query).then(function(issues) {
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

@@ -4,9 +4,10 @@ var _ = require('underscore');
 var print = require('../core/print');
 var _s = require('underscore.string');
 
-module.exports = function(args) {
+module.exports = function() {
+    var args = _.toArray(arguments);
     return new Promise(function(resolve, reject) {
-        getIssues(args).then(function(issues) {
+        getIssues.apply(this, args).then(function(issues) {
             if (issues.length === 0) {
                 return resolve(null);
             }

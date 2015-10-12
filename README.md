@@ -9,6 +9,17 @@
 * Run `npm install jira-pal --global`
 * Run commands. Suggested initial command `jira init`
 
+##Possible Issues with NPM and Node
+
+* Setting up NPM can be real fun, or not real fun. You may need to use `sudo` for your installs on unix environments
+* If you run into permission issues, [Try This!](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
+  * Particularly changing ownership of your npm directory
+  
+##Possible Issues with Jira Pal!
+* Yep, it's still young. If you encounter a bug, please add a github issue
+* If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`. 
+  * These are always safe bets to start over.
+
 ##Usage
 
 * `jira <command> <options`

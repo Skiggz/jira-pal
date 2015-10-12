@@ -83,3 +83,12 @@ function JiraCache() {
 }
 
 module.exports = new JiraCache();
+
+/*
+* Make sure cache directory exists, if not, create it
+* */
+try {
+    fs.mkdirSync(__dirname + '/../cache');
+} catch(e) {
+    if ( e.code != 'EEXIST' ) throw e;
+}

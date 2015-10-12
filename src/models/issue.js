@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var JiraFields = require('./fields.js');
+var colors = require('colors/safe');
 module.exports = function JiraIssue(dataObject) {
 
     var self = this;
@@ -29,6 +30,27 @@ module.exports = function JiraIssue(dataObject) {
             return self.fields.status.name;
         }
         return '?';
+    };
+
+    this.assignee = function() {
+        if (self.fields && self.fields.assignee) {
+            return self.fields.assignee.displayName || '?';
+        }
+        return '?';
+    };
+
+    this.typeColored = function() {
+        if (self.isBug()) {
+            return colors.red(self.type());
+        } else if (self.isFeature()) {
+            return colors.yellow(self.type());
+        } else if (self.isChore()) {
+            return colors.gray(self.type());
+        } else if (self.isTask()) {
+            return colors.blue(self.type());
+        } else {
+            return self.type();
+        }
     };
 
     this.isBug = function() {

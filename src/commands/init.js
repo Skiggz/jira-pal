@@ -5,7 +5,6 @@ var print = require('../core/print');
 var fs = require('fs');
 var _s = require('underscore.string');
 var _ = require('underscore');
-var cacheCommand = require('../commands/prime');
 
 /*
 * Settings to populate from responses
@@ -34,28 +33,7 @@ var complete = function() {
         } else {
             print.info('\nSettings were NOT updated.\n');
         }
-        /*
-        * Last but not least, ask them if they would like to pull down data from jira
-        * This will help speed up all future calls.
-        * */
-        print.ask(
-            print.question(
-                'confirm',
-                'cache',
-                'Would you like to prime all of your local caches for JIRA information (statuses, fields, etc..)?'
-            )
-        ).then(
-            function(answers) {
-                if (answers.cache) {
-                    // run cache job
-                    cacheCommand();
-                } else {
-                    print.info('Cache was not primed. Some calls may be slow until caches are filled. ' +
-                        'To prime caches at any time, run jira prime. ' +
-                        'You can also invalidate the caches by running jira evict.');
-                }
-            }
-        );
+        print.info('Init complete. It is suggested, but not necessary that you run `jira-pal prime` (the prime command) to prime your jira caches. Enjoy.');
     });
 };
 

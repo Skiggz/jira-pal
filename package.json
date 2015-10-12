@@ -1,7 +1,7 @@
 {
   "name": "jira-pal",
   "private": false,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Jira Terminal Pal",
   "keywords": [],
   "dependencies": {
@@ -15,6 +15,10 @@
     "cli-table": "~0.3.1",
     "cliff": "~0.1.10",
     "copy-paste-no-exec": "git+ssh://git@github.com:Skiggz/node-copy-paste#1.0.0"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "jira": "./src/jira.js"
   },
   "main": "src/jira.js",
   "repository": "https://github.com/Skiggz/jira-pal",

@@ -7,62 +7,56 @@
 * Install `node` if you do not have it
 * Install `npm` if applicable
 * Run `npm install jira-pal --global`
-  * I suggest aliasing this to something easy to type (I used `jira`)
 * Run commands. Suggested initial command `node jira.js init`
-
-Notes about manual installation
-
-* If you pull down this repo to use this manually, you may want to add an alias to your environment
-  * Bash example: `alias jira='node /path/to/this/repo/src/jira.js'`
 
 ##Usage
 
-* `jira-pal <command> <options`
+* `jira <command> <options`
 
 ##Examples
 
-* `jira-pal help`
+* `jira help`
   * View list of commands and what they do
-* `jira-pal login`
+* `jira login`
   * Store my login information
-* `jira-pal logout`
+* `jira logout`
   * Clear my login information
-* `jira-pal init`
+* `jira init`
   * Set up your settings for your jira distribution and usage preferences
-* `jira-pal lookup`
+* `jira lookup`
   * Raw advanced search functionality. `search`, `me`, and `copy` commands all use text contains search. If you want full on search using JQL, use `lookup`.
-* `jira-pal me`
-  * Returns all stories you are assigned to, that fall under your default me statuses from `jira-pal init`
-* `jira-pal me foobar`
+* `jira me`
+  * Returns all stories you are assigned to, that fall under your default me statuses from `jira init`
+* `jira me foobar`
   * Returns all stories you are assigned to that search returns "foobar" for (i.e. search my stories)
-* `jira-pal copy`
-  * Copy a story key (id) from the result set returned by `jira-pal me`
-* `jira-pal copy foobar`
+* `jira copy`
+  * Copy a story key (id) from the result set returned by `jira me`
+* `jira copy foobar`
   * Copy a story id from ANY story that search returns for search critiera `foobar`
-* `jira-pal search`
-  * Same as `jira-pal me`
-* `jira-pal search foobar`
+* `jira search`
+  * Same as `jira me`
+* `jira search foobar`
   * Search for any story containing foobar in jira
-* `jira-pal list s` or `jira-pal list statuses`
+* `jira list s` or `jira list statuses`
   * List all options for jira statuses, this is useful for changing your default `me` command statuses
-* `jira-pal prime`
+* `jira prime`
   * Prime caches for various jira information that doesnt change often, like statuses
-* `jira-pal evict`
+* `jira evict`
   * Clear caches
   
 ##Searching
  
-* As noted in the examples above, `lookup` is the command you want to use to enter raw jql queries. There is an example using `jira-pal help lookup`.
+* As noted in the examples above, `lookup` is the command you want to use to enter raw jql queries. There is an example using `jira help lookup`.
 * JQL is defined here on jiras website under [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
 * `search`, `me` and `copy` commands all search using "text contains ____" where the blank is whatever you type
-  * Example: `jira-pal search foobar` is actually doing a JQL search of "text contains foobar"
+  * Example: `jira search foobar` is actually doing a JQL search of "text contains foobar"
 
 
 ##Settings
 
 * Default settings are stored in `data/settings.js`
 * To override settings you can add your own `data/settings-override.js`
-  * This happens when you run `jira-pal init`. Make your life easier and just run that command and follow the prompts
+  * This happens when you run `jira init`. Make your life easier and just run that command and follow the prompts
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
   * Make sure your `data/settings-override.js` exports a js object with desired settings
   

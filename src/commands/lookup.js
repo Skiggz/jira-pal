@@ -33,4 +33,4 @@ module.exports = function() {
 };
 
 module.exports.moduleDescription = 'Raw jira search using JQL statements';
-module.exports.moduleDescriptionExtra = 'Raw jira search. Example: jira-pal lookup assignee = mycoworker';
+module.exports.moduleDescriptionExtra = 'Raw jira search. Example: jira lookup assignee = mycoworker';

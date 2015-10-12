@@ -33,7 +33,7 @@ var complete = function() {
         } else {
             print.info('\nSettings were NOT updated.\n');
         }
-        print.info('Init complete. It is suggested, but not necessary that you run `jira-pal prime` (the prime command) to prime your jira caches. Enjoy.');
+        print.info('Init complete. It is suggested, but not necessary that you run `jira prime` (the prime command) to prime your jira caches. Enjoy.');
     });
 };
 

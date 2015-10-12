@@ -8,7 +8,6 @@ module.exports = function() {
     });
 };
 
-module.exports.requiresLogin = false;
 module.exports.moduleDescription = 'Populates local caches for various JIRA information for your JIRA setup.';
 module.exports.moduleDescriptionExtra =
     'Many of jira-pals commands take arguments that are specific to your JIRA projects, like statues etc.. ' +

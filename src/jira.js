@@ -18,15 +18,9 @@ if (!commands[command]) {
 * Create arguments for commands excluding
 * node and the script call
 * */
-var args = {
-    length: process.argv.length - 3
-};
-for (var i = 3; i < process.argv.length; i++) {
-    args[i - 3] = process.argv[i];
-}
-
+var args = _.toArray(process.argv).slice(3);
 var runCommand = function() {
-    commands[command](args);
+    commands[command].apply(this, args);
 };
 
 /*

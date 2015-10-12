@@ -418,6 +418,10 @@ function QueryBuilder() {
         return self.query;
     };
 
+    this.toString = function() {
+        return self.toQuery().jql;
+    };
+
 }
 
 module.exports.search = function(query) {

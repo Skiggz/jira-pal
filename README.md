@@ -47,6 +47,11 @@ Notes about manual installation
   * Prime caches for various jira information that doesnt change often, like statuses
 * `jira-pal evict`
   * Clear caches
+  
+##Searching
+  
+* All of the search functionality uses jira's advanced search syntax. If you want to get the best out of this, check out their documentation on [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
+
 
 ##Settings
 

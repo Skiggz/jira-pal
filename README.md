@@ -29,6 +29,8 @@ Notes about manual installation
   * Clear my login information
 * `jira-pal init`
   * Set up your settings for your jira distribution and usage preferences
+* `jira-pal lookup`
+  * Raw advanced search functionality. `search`, `me`, and `copy` commands all use text contains search. If you want full on search using JQL, use `lookup`.
 * `jira-pal me`
   * Returns all stories you are assigned to, that fall under your default me statuses from `jira-pal init`
 * `jira-pal me foobar`
@@ -49,8 +51,11 @@ Notes about manual installation
   * Clear caches
   
 ##Searching
-  
-* All of the search functionality uses jira's advanced search syntax. If you want to get the best out of this, check out their documentation on [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
+ 
+* As noted in the examples above, `lookup` is the command you want to use to enter raw jql queries. There is an example using `jira-pal help lookup`.
+* JQL is defined here on jiras website under [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
+* `search`, `me` and `copy` commands all search using "text contains ____" where the blank is whatever you type
+  * Example: `jira-pal search foobar` is actually doing a JQL search of "text contains foobar"
 
 
 ##Settings

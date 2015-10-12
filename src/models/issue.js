@@ -39,6 +39,13 @@ module.exports = function JiraIssue(dataObject) {
         return '?';
     };
 
+    this.project = function() {
+        if (self.fields && self.fields.project) {
+            return self.fields.project.name || '?';
+        }
+        return '?';
+    };
+
     this.typeColored = function() {
         if (self.isBug()) {
             return colors.red(self.type());

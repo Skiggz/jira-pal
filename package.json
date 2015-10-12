@@ -6,15 +6,16 @@
   "keywords": [],
   "dependencies": {
     "bluebird": "~2.10.0",
+    "cli-table": "~0.3.1",
+    "cliff": "~0.1.10",
+    "colors": "~1.1.2",
+    "copy-paste-no-exec": "git+ssh://git@github.com:Skiggz/node-copy-paste#1.0.0",
     "inquirer": "^0.10.0",
     "moment": "~2.10.3",
     "numeral": "~1.5.3",
+    "open": "0.0.5",
     "underscore": "~1.8.2",
-    "underscore.string": "~3.0.3",
-    "colors": "~1.1.2",
-    "cli-table": "~0.3.1",
-    "cliff": "~0.1.10",
-    "copy-paste-no-exec": "git+ssh://git@github.com:Skiggz/node-copy-paste#1.0.0"
+    "underscore.string": "~3.0.3"
   },
   "preferGlobal": true,
   "bin": {

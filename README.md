@@ -14,10 +14,10 @@
 * Setting up NPM can be real fun, or not real fun. You may need to use `sudo` for your installs on unix environments
 * If you run into permission issues, [Try This!](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
   * Particularly changing ownership of your npm directory
-  
+
 ##Possible Issues with Jira Pal!
 * Yep, it's still young. If you encounter a bug, please add a github issue
-* If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`. 
+* If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`.
   * These are always safe bets to start over.
 
 ##Usage
@@ -40,10 +40,16 @@
   * Returns all stories you are assigned to, that fall under your default me statuses from `jira init`
 * `jira me foobar`
   * Returns all stories you are assigned to that search returns "foobar" for (i.e. search my stories)
+* `jira open`
+  * Select from issues assigned to you and open it in your default web browser.
+* `jira open XXX-123`
+  * Opens the issue in your default web browser.
+* `jira open -s foobar`
+  * Open an issue in your default web browser from ANY story that search returns for search criteria `foobar`
 * `jira copy`
   * Copy a story key (id) from the result set returned by `jira me`
 * `jira copy foobar`
-  * Copy a story id from ANY story that search returns for search critiera `foobar`
+  * Copy a story id from ANY story that search returns for search criteria `foobar`
 * `jira search`
   * Same as `jira me`
 * `jira search foobar`
@@ -54,9 +60,9 @@
   * Prime caches for various jira information that doesnt change often, like statuses
 * `jira evict`
   * Clear caches
-  
+
 ##Searching
- 
+
 * As noted in the examples above, `lookup` is the command you want to use to enter raw jql queries. There is an example using `jira help lookup`.
 * JQL is defined here on jiras website under [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
 * `search`, `me` and `copy` commands all search using "text contains ____" where the blank is whatever you type
@@ -70,7 +76,7 @@
   * This happens when you run `jira init`. Make your life easier and just run that command and follow the prompts
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
   * Make sure your `data/settings-override.js` exports a js object with desired settings
-  
+
 ###Current Settings Options
 
 * `url`: The url for your jira installation. `Required`

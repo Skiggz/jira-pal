@@ -19,10 +19,40 @@ Notes about manual installation
 
 * `jira-pal <command> <options`
 
+##Examples
+
+* `jira-pal help`
+  * View list of commands and what they do
+* `jira-pal login`
+  * Store my login information
+* `jira-pal logout`
+  * Clear my login information
+* `jira-pal init`
+  * Set up your settings for your jira distribution and usage preferences
+* `jira-pal me`
+  * Returns all stories you are assigned to, that fall under your default me statuses from `jira-pal init`
+* `jira-pal me foobar`
+  * Returns all stories you are assigned to that search returns "foobar" for (i.e. search my stories)
+* `jira-pal copy`
+  * Copy a story key (id) from the result set returned by `jira-pal me`
+* `jira-pal copy foobar`
+  * Copy a story id from ANY story that search returns for search critiera `foobar`
+* `jira-pal search`
+  * Same as `jira-pal me`
+* `jira-pal search foobar`
+  * Search for any story containing foobar in jira
+* `jira-pal list s` or `jira-pal list statuses`
+  * List all options for jira statuses, this is useful for changing your default `me` command statuses
+* `jira-pal prime`
+  * Prime caches for various jira information that doesnt change often, like statuses
+* `jira-pal evict`
+  * Clear caches
+
 ##Settings
 
 * Default settings are stored in `data/settings.js`
 * To override settings you can add your own `data/settings-override.js`
+  * This happens when you run `jira-pal init`. Make your life easier and just run that command and follow the prompts
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
   * Make sure your `data/settings-override.js` exports a js object with desired settings
   

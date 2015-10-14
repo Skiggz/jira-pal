@@ -49,11 +49,7 @@ module.exports = function() {
                 }),
         print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default. (Suggested: me)'),
-        print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress'),
-        print.question('input', 'directory', 'Where would you like to store your settings and credential files? Press enter to use home directory, or enter a custom directory path.')
-            .validIf(function(input) {
-                return !input || fs.existsSync(input) || ('File' + input + 'does not exist. Enter a valid path or nothing to use your home directory.');
-            })
+        print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress')
     ).then(function(answers) {
             settings.url = answers.url.replace(/\/+$/, ''); // replace trailing slashes
             settings.colors = answers.colors;
@@ -68,20 +64,6 @@ module.exports = function() {
                 settings.defaultMeStatuses = _.map(answers.defaultMeStatuses.split(','), function(status) {
                     return _s.trim(status);
                 });
-            }
-            if (answers.directory) {
-                settings.directory = answers.directory;
-            } else {
-                /*
-                 * If directory is not set, use user home directory
-                 * */
-                var home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-                if (home) {
-                    settings.directory = home;
-                } else {
-                    // worst case, fallback to the cache directory. at least things won't be shared if using git
-                    settings.directory = __dirname + '/../cache';
-                }
             }
             complete();
         });

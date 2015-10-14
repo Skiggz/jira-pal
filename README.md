@@ -80,12 +80,13 @@
 * Default settings are stored in `data/settings.js`
 * To override settings run `jira init` and follow the prompts
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
+* Jira pal stores settings and crednetials in a folder `.jira-pal` in your home directory
+  * If you would like to change this, set system environment variable `JIRA_PAL_HOME`;
 
 ###Current Settings Options
 
 * `url`: The url for your jira installation. `Required`
 * `colors`: If truthy, show terminal colors in output. Default `true`
-* `directory`: Tells the application where to store the base64 basic auth credentials and user settings
 * `username`: Jira username. This is used for fetching YOUR assigned stories and other various tasks related to you
   * Find this by navigating to your jira profile. The URL should look like `.../secure/ViewProfile.jspa?name=USERNAME`
 * `defaultCommand`: The default command that runs when you run `node jira.js`. Default `help`. Suggested `me`.

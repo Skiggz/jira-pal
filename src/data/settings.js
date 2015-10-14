@@ -31,8 +31,25 @@ if (fs.existsSync(overrides)) {
     try {
         _.extendOwn(settings, JSON.parse(fs.readFileSync(overrides)));
     } catch (e) {
+        // depending on print.js introduces cyclic dependency-- use console.error
         console.error(_s.sprintf('Failed to include settings overrides because %s', e && e.message));
     }
 }
 
-module.exports = settings;
+module.exports = {
+
+    gett: settings,
+
+    directory: function() {
+        return settings['directory'] + '/.jira-pal';
+    },
+
+    credsLocation: function() {
+        return module.exports.directory() + '/credentials.js';
+    },
+
+    overridesLocation: function() {
+        return module.exports.directory() + '/settings-override.js';
+    }
+
+};

@@ -8,7 +8,7 @@ var api = require('./core/api');
 var commands = require('./core/commands');
 
 // default command is help, and avoids index out of bounds errors
-var command = process.argv.length > 2 ? process.argv[2] : settings.defaultCommand;
+var command = process.argv.length > 2 ? process.argv[2] : settings.gett.defaultCommand;
 
 if (!commands[command]) {
     print.fail(_s.sprintf('Command "%s" not found.', command));
@@ -43,7 +43,7 @@ if (commands[command].requiresLogin !== false) {
      * Check to see if the credentials module exists, if not
      * create it.
      * */
-    var location = settings.directory + '/.jira-pal/credentials.js';
+    var location = settings.credsLocation();
     if (!fs.existsSync(location)) {
         commands.logout();
     }

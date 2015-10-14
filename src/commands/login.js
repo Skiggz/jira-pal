@@ -22,7 +22,7 @@ module.exports = function() {
             print.question('password', 'password', 'JIRA Password')
         ).then(function(answer) {
             var login = new Buffer(_s.sprintf('%s:%s', answer.username, answer.password)).toString('base64');
-            fs.writeFileSync(settings.directory + '/.jira-pal/credentials.js', _s.sprintf('module.exports = \'%s\';\n', login));
+            fs.writeFileSync(settings.credsLocation(), _s.sprintf('module.exports = \'%s\';\n', login));
             resolve(login);
         });
     });

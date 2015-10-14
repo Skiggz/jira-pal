@@ -7,7 +7,7 @@ var selectIssue = require('../util/select-issue');
 var open = require('open');
 
 function openIssue(id) {
-    open(_s.sprintf('https://%s/browse/%s', settings.url, id));
+    open(_s.sprintf('https://%s/browse/%s', settings.gett.url, id));
 }
 
 module.exports = function() {

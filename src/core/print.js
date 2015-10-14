@@ -11,7 +11,7 @@ var Table = require('cli-table');
 * Respects various settings configs
 * */
 function print(color, words) {
-    if (settings.colors) {
+    if (settings.gett.colors) {
         console.log(colors[color](words));
     } else {
         console.log(words);

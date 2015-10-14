@@ -13,6 +13,7 @@ var settings = {};
 
 var complete = function() {
     var settingsJSON = JSON.stringify(settings, null, 2);
+    // cannot depend on settings yet since we are sort of making them, so this is hard coded for now
     var location = settings.directory + '/.jira-pal/settings-override.js';
     print.ask(
         print.question(

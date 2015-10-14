@@ -11,7 +11,7 @@ var meQueryOrSearch = require('../util/me-query-or-search');
 module.exports = function() {
     var query = meQueryOrSearch.apply(this, _.toArray(arguments));
     if (arguments.length > 0) {
-        query = query.and().fields.assignee().equals(settings.username);
+        query = query.and().fields.assignee().equals(settings.gett.username);
     }
     getIssues(query).then(function(issues) {
         var rows = [];

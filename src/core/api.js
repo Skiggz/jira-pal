@@ -26,7 +26,7 @@ function api(method, path, headers, data) {
         // All of JIRAs apis are application json, if data, set type
         headers['Content-Type'] = 'application/json';
         var request = https.request({
-            hostname: settings.url,
+            hostname: settings.gett.url,
             port: 443,
             path: path,
             method: method,

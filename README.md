@@ -72,16 +72,14 @@
 ##Settings
 
 * Default settings are stored in `data/settings.js`
-* To override settings you can add your own `data/settings-override.js`
-  * This happens when you run `jira init`. Make your life easier and just run that command and follow the prompts
+* To override settings run `jira init` and follow the prompts
   * These settings will EXTEND `data/settings.js` meaning only keys present are over written
-  * Make sure your `data/settings-override.js` exports a js object with desired settings
 
 ###Current Settings Options
 
 * `url`: The url for your jira installation. `Required`
 * `colors`: If truthy, show terminal colors in output. Default `true`
-* `credentialsFileLocation`: Tells the application where to store the base64 basic auth credentials
+* `directory`: Tells the application where to store the base64 basic auth credentials and user settings
 * `username`: Jira username. This is used for fetching YOUR assigned stories and other various tasks related to you
   * Find this by navigating to your jira profile. The URL should look like `.../secure/ViewProfile.jspa?name=USERNAME`
 * `defaultCommand`: The default command that runs when you run `node jira.js`. Default `help`. Suggested `me`.

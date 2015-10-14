@@ -13,19 +13,18 @@ var settings = {};
 
 var complete = function() {
     var settingsJSON = JSON.stringify(settings, null, 2);
+    var location = settings.directory + '/.jira-pal/settings-override.js';
     print.ask(
         print.question(
             'confirm',
             'write',
-            _s.sprintf('Write these settings to ../data/settings-override.js?\n\n%s\n\n', settingsJSON)
+            _s.sprintf('Write these settings to %s?\n\n%s\n\n', location,settingsJSON)
         )
     ).then(function(answers) {
         if (answers.write) {
             // write settings to file
             try {
-                fs.writeFileSync(
-                    __dirname + '/../data/settings-override.js', _s.sprintf('module.exports = %s;\n', settingsJSON)
-                );
+                fs.writeFileSync(location, settingsJSON);
             } catch (e) {
                 print.fail(_s.sprintf('Writing settings failed because: %s', e && e.message));
             }
@@ -50,8 +49,10 @@ module.exports = function() {
         print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default. (Suggested: me)'),
         print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress'),
-        print.question('confirm', 'credentials', 'Are you ok with using the default credentials file location?')
-            .defaultTo('help')
+        print.question('input', 'directory', 'Where would you like to store your settings and credential files? Press enter to use home directory, or enter a custom directory path.')
+            .validIf(function(input) {
+                return !input || fs.existsSync(input) || ('File' + input + 'does not exist. Enter a valid path or nothing to use your home directory.');
+            })
     ).then(function(answers) {
             settings.url = answers.url.replace(/\/+$/, ''); // replace trailing slashes
             settings.colors = answers.colors;
@@ -67,21 +68,21 @@ module.exports = function() {
                     return _s.trim(status);
                 });
             }
-            if (!answers.credentials) {
-                print.ask(
-                    print.question('input', 'filename', 'Please enter the location where you would like to store our base64 credentials')
-                        .validIf(function(input) {
-                            return !input || fs.existsSync(input) || ('File' + input + 'does not exist. Enter nothing to fallback to default.');
-                        })
-                ).then(function(secondAnswers) {
-                        if (secondAnswers.filename) {
-                            settings.credentialsFileLocation = secondAnswers.filename;
-                        }
-                        complete();
-                    })
+            if (answers.directory) {
+                settings.directory = answers.directory;
             } else {
-                complete();
+                /*
+                 * If directory is not set, use user home directory
+                 * */
+                var home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+                if (home) {
+                    settings.directory = home;
+                } else {
+                    // worst case, fallback to the cache directory. at least things won't be shared if using git
+                    settings.directory = __dirname + '/../cache';
+                }
             }
+            complete();
         });
 };
 

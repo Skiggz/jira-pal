@@ -15,7 +15,7 @@ module.exports = function() {
     * worried, change it, or implement a friendly terminal oauth
     * solution :)
     * */
-    fs.writeFileSync(settings.credentialsFileLocation, 'module.exports = null;');
+    fs.writeFileSync(settings.directory + '/.jira-pal/credentials.js', 'module.exports = null;');
 };
 
 module.exports.requiresLogin = false;

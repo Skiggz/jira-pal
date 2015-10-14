@@ -1,8 +1,9 @@
+// make sure to require settings first and foremost
+var settings = require('./data/settings');
 var fs = require('fs');
 var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('./core/print');
-var settings = require('./data/settings');
 var api = require('./core/api');
 var commands = require('./core/commands');
 
@@ -42,11 +43,12 @@ if (commands[command].requiresLogin !== false) {
      * Check to see if the credentials module exists, if not
      * create it.
      * */
-    if (!fs.existsSync(settings.credentialsFileLocation)) {
+    var location = settings.directory + '/.jira-pal/credentials.js';
+    if (!fs.existsSync(location)) {
         commands.logout();
     }
 
-    var creds = require(settings.credentialsFileLocation.replace(/\.js$/, ''));
+    var creds = require(location.replace(/\.js$/, ''));
 
     if (creds === null) {
         commands.login().then(function(newCreds) {

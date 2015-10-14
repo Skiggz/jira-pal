@@ -1,21 +1,38 @@
 var fs = require('fs');
 var _ = require('underscore');
-var print = require('../core/print');
+var _s = require('underscore.string');
 
-module.exports = {
+var settings = {
     // the base url for your jira
     url: '',
     colors: true,
-    credentialsFileLocation: __dirname + '/credentials.js',
     username: null,
     defaultCommand: 'help',
-    defaultMeStatuses: ["In Progress"]
+    defaultMeStatuses: ["In Progress"],
+    directory: process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
 };
 
-if (fs.existsSync(__dirname + '/settings-override.js')) {
+/*
+ * Make sure our jira-pal directory exists, if not, create it
+ * */
+try {
+    fs.mkdirSync(settings.directory + '/.jira-pal');
+} catch(e) {
+    if ( e.code != 'EEXIST' ) throw e;
+}
+
+/*
+* Now lookup setting overrides and apply them if they exist (if user entered a custom location then
+* we shouldn't find a settings override file yet)
+* */
+
+var overrides = settings.directory + '/.jira-pal/settings-override.js';
+if (fs.existsSync(overrides)) {
     try {
-        _.extendOwn(module.exports, require('./settings-override'));
+        _.extendOwn(settings, JSON.parse(fs.readFileSync(overrides)));
     } catch (e) {
-        print.fail(_s.sprintf('Failed to include settings overrides because %s', e && e.message));
+        console.error(_s.sprintf('Failed to include settings overrides because %s', e && e.message));
     }
 }
+
+module.exports = settings;

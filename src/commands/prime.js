@@ -1,10 +1,15 @@
 var print = require('../core/print');
+var Promise = require('bluebird');
 var statuses = require('../data/jira/statuses');
+var priorities = require('../data/jira/priorities');
 module.exports = function() {
-    statuses.list().then(function() {
-        print.success('Primed statuses cache');
+    Promise.all(
+        statuses.list(),
+        priorities.list()
+    ).then(function() {
+        print.success('Primed caches');
     }, function(e) {
-        print.fail('Priming statues cache failed. ' + e ? e.message : '');
+        print.fail('Priming cache failed. ' + e ? e.message : '');
     });
 };
 

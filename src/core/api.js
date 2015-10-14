@@ -25,6 +25,7 @@ var JiraCreateTicketMeta = require('../models/create-meta');
 var JiraIssue = require('../models/issue');
 var JiraStatus = require('../models/status.js');
 var JiraPriority = require('../models/priority.js');
+var JiraProject = require('../models/project.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -484,6 +485,10 @@ module.exports.statuses = function() {
 
 module.exports.priorities = function() {
     return apiListRoot(JiraPriority, 'GET', '/rest/api/2/priority');
+};
+
+module.exports.projects = function() {
+    return apiListRoot(JiraProject, 'GET', '/rest/api/2/project');
 };
 
 module.exports.assignable = function(projectKey) {

@@ -16,13 +16,12 @@ var Promise = require('bluebird');
 * in your cache class. Make sure to override getHeader
 * and getRow for listing functionality.
 * */
-function BaseCache(cacheIdentifier, filename, apiMethodName, itemType) {
+function BaseCache(cacheIdentifier, filename, apiMethodName) {
 
     var self = this;
     this.id = cacheIdentifier;
     this.filename = filename;
     this.apiMethodName = apiMethodName;
-    this.itemType = itemType;
 
     cache.add(self.id, self.filename);
 
@@ -39,9 +38,7 @@ function BaseCache(cacheIdentifier, filename, apiMethodName, itemType) {
             var json = cache.gett(self.id);
             if (!json) {
                 api[self.apiMethodName]().then(function(response) {
-                    var items = _.map(JSON.parse(response.payload), function(s) {
-                        return new self.itemType(s);
-                    });
+                    var items = response.data;
                     cache.sett(self.id, JSON.stringify(items));
                     resolve(items);
                 }, function(e) {

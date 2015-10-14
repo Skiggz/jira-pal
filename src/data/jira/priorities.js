@@ -1,9 +1,8 @@
 var BaseCache = require('../base-cache.js');
-var JiraPriority = require('../../models/priority.js');
 
 function JiraPriorityCache() {
 
-    BaseCache.prototype.constructor.apply(this, ['priorities', 'priorities.js', 'priorities', JiraPriority]);
+    BaseCache.prototype.constructor.apply(this, ['priorities', 'priorities.js', 'priorities']);
 
     this.getHeader = function() {
         return [

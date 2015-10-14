@@ -1,13 +1,13 @@
-var getIssues = require('./issues');
+var api = require('../core/api');
 var Promise = require('bluebird');
 var _ = require('underscore');
 var print = require('../core/print');
 var _s = require('underscore.string');
 
-module.exports = function() {
-    var args = _.toArray(arguments);
+module.exports = function(query) {
     return new Promise(function(resolve, reject) {
-        getIssues.apply(this, args).then(function(issues) {
+        api.search(query).then(function(response) {
+            var issues = response.data;
             if (issues.length === 0) {
                 return resolve(null);
             }

@@ -1,13 +1,11 @@
 var _ = require('underscore');
 var api = require('../core/api');
 var print = require('../core/print');
-var JiraCreateTicketMeta = require('../models/create-meta');
+
 
 module.exports = function() {
-    api.createMeta().then(function(r) {
-        var metas = _.map(JSON.parse(r.payload).projects, function(meta) {
-            return new JiraCreateTicketMeta(meta);
-        });
+    api.createMeta().then(function(response) {
+        var metas = response.data;
         /*
         * List available projects
         * */
@@ -24,7 +22,8 @@ module.exports = function() {
             });
             print.ask(issueTypeQuestion).then(function(issueTypeAnswer) {
                 var assigneeQuestion = print.question('list', 'assignee', 'Please select an assignee');
-                api.assignable(project.key).then(function(assignable) {
+                api.assignable(project.key).then(function(response2) {
+                    var assignable = response2.data;
                     assigneeQuestion.choice('None');
                     _.each(assignable, function(assignee) {
                         assigneeQuestion.choice(assignee.displayName);

@@ -2,14 +2,14 @@ var api = require('../core/api');
 var _ = require('underscore');
 var print = require('../core/print');
 var colors = require('colors/safe');
-var getIssues = require('../util/issues');
 
 module.exports = function() {
     var query = api.queryBuilder().search;
     for (var i = 0; i < arguments.length; i++) {
         query.raw(arguments[i]);
     }
-    getIssues(query).then(function(issues) {
+    api.search(query).then(function(response) {
+        var issues = response.data;
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

@@ -6,12 +6,12 @@ var _s = require('underscore.string');
 var _ = require('underscore');
 var print = require('../core/print');
 var colors = require('colors/safe');
-var getIssues = require('../util/issues');
 var meQueryOrSearch = require('../util/me-query-or-search');
 var api = require('../core/api');
 
 module.exports = function() {
-    getIssues(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(issues) {
+    api.search(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(response) {
+        var issues = response.data;
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

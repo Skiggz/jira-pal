@@ -5,7 +5,7 @@ var _ = require('underscore');
 var settings = require('../data/settings');
 var print = require('../core/print');
 var colors = require('colors/safe');
-var getIssues = require('../util/issues');
+var api = require('../core/api');
 var meQueryOrSearch = require('../util/me-query-or-search');
 
 module.exports = function() {
@@ -13,7 +13,8 @@ module.exports = function() {
     if (arguments.length > 0) {
         query = query.and().fields.assignee().equals(settings.gett.username);
     }
-    getIssues(query).then(function(issues) {
+    api.search(query).then(function(response) {
+        var issues = response.data;
         var rows = [];
         _.each(issues, function(issue) {
             rows.push(

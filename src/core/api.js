@@ -21,6 +21,10 @@ module.exports.init = function(base64credentials) {
 * Models
 * */
 var JiraUser = require('../models/user');
+var JiraCreateTicketMeta = require('../models/create-meta');
+var JiraIssue = require('../models/issue');
+var JiraStatus = require('../models/status.js');
+var JiraPriority = require('../models/priority.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -71,6 +75,31 @@ function api(method, path, headers, data) {
         request.end();
     });
 };
+
+function apiList(type, payloadKey, method, path, headers, data) {
+    return new Promise(function(resolve, reject) {
+        api(method, path, headers, data).then(function(response) {
+            var deserialized = JSON.parse(response.payload);
+            response.data = _.map(payloadKey ? deserialized[payloadKey] : deserialized, function(item) {
+                return new type(item);
+            });
+            resolve(response);
+        }, reject);
+    });
+}
+
+function apiListRoot(type, method, path, headers, data) {
+    return apiList(type, null, method, path, headers, data);
+}
+
+function apiItem(type, method, path, headers, data) {
+    return new Promise(function(resolve, reject) {
+        api(method, path, headers, data).then(function(response) {
+            response.data = new type(JSON.parse(response.payload));
+            resolve(response);
+        }, reject);
+    });
+}
 
 /*
 * JIRA Query API
@@ -441,32 +470,26 @@ function QueryBuilder() {
 
 }
 
-module.exports.search = function(query) {
-    return api('POST', '/rest/api/2/search', null, query.query().toQuery());
-};
-
-module.exports.statuses = function() {
-    return api('GET', '/rest/api/2/status');
-};
-
-module.exports.priorities = function() {
-    return api('GET', '/rest/api/2/priority');
-};
-
-module.exports.assignable = function(projectKey) {
-    return new Promise(function(resolve, reject) {
-        api('GET', '/rest/api/2/user/assignable/search?project=' + projectKey).then(function(response) {
-            resolve(_.map(JSON.parse(response.payload), function(rawUser) {
-                return new JiraUser(rawUser);
-            }));
-        }, reject);
-    });
-};
-
 module.exports.queryBuilder = function() {
     return new QueryBuilder();
 };
 
+module.exports.search = function(query) {
+    return apiList(JiraIssue, 'issues', 'POST', '/rest/api/2/search', null, query.query().toQuery());
+};
+
+module.exports.statuses = function() {
+    return apiListRoot(JiraStatus, 'GET', '/rest/api/2/status');
+};
+
+module.exports.priorities = function() {
+    return apiListRoot(JiraPriority, 'GET', '/rest/api/2/priority');
+};
+
+module.exports.assignable = function(projectKey) {
+    return apiListRoot(JiraUser, 'GET', '/rest/api/2/user/assignable/search?project=' + projectKey);
+};
+
 module.exports.createMeta = function() {
-    return api('GET', '/rest/api/2/issue/createmeta');
+    return apiList(JiraCreateTicketMeta, 'projects', 'GET', '/rest/api/2/issue/createmeta');
 };

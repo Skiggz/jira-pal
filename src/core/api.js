@@ -447,3 +447,7 @@ module.exports.statuses = function() {
 module.exports.queryBuilder = function() {
     return new QueryBuilder();
 };
+
+module.exports.createMeta = function() {
+    return api('GET', '/rest/api/2/issue/createmeta');
+};

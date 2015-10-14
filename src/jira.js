@@ -1,11 +1,28 @@
-// make sure to require settings first and foremost
+// make sure to require settings first and foremost to setup
 var settings = require('./data/settings');
+var Promise = require('bluebird');
 var fs = require('fs');
 var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('./core/print');
 var api = require('./core/api');
 var commands = require('./core/commands');
+
+// bluebird setup
+Promise.onPossiblyUnhandledRejection(function(reason, promise) {
+    var why = reason && reason.message;
+    // lots of api calls may 401/403 so we can consider this something to ignore
+    if (why !== 'Unauthorized') {
+        // otherwise, suggest that we maybe report the error
+        print.fail(
+            [
+                'Unhandled failure. Error message: ',
+                why,
+                '. You may consider reporting an issue to https://github.com/Skiggz/jira-pal/issues'
+            ].join('')
+        );
+    }
+});
 
 // default command is help, and avoids index out of bounds errors
 var command = process.argv.length > 2 ? process.argv[2] : settings.gett.defaultCommand;

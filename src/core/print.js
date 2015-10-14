@@ -54,6 +54,20 @@ function Question(type, answerKey, message) {
         return self;
     };
 
+    this.checkbox = function(name, checked, disabled) {
+        var option = {
+            name: name
+        };
+        if (checked !== void(0)) {
+            option.checked = checked;
+        }
+        if (disabled) {
+            option.disabled = disabled;
+        }
+        self.choices.push(option);
+        return self;
+    };
+
     this.separator = function() {
         self.choices.push(new question.Separator());
         return self;

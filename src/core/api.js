@@ -444,6 +444,10 @@ module.exports.statuses = function() {
     return api('GET', '/rest/api/2/status');
 };
 
+module.exports.priorities = function() {
+    return api('GET', '/rest/api/2/priority');
+};
+
 module.exports.queryBuilder = function() {
     return new QueryBuilder();
 };

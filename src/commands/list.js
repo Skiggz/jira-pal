@@ -1,6 +1,7 @@
 var statuses = require('../data/jira/statuses');
 var priorities = require('../data/jira/priorities');
 var projects = require('../data/jira/projects');
+var components = require('../data/jira/components');
 var print = require('../core/print');
 
 module.exports = function() {
@@ -13,6 +14,8 @@ module.exports = function() {
             priorities.display();
         } else if (command === 'project' || command === 'projects') {
             projects.display();
+        } else if (command === 'component' || command === 'components') {
+            components.display();
         } else {
             print.info(command + ' not found.');
         }
@@ -23,5 +26,5 @@ module.exports = function() {
 };
 
 module.exports.requiresLogin = true;
-module.exports.moduleDescription = 'Lists various things. Current options: status,priority,project';
-module.exports.moduleDescriptionExtra = 'Current options: status,priority,project';
+module.exports.moduleDescription = 'Lists various things. Current options: status,priority,project,component';
+module.exports.moduleDescriptionExtra = 'Current options: status,priority,project,component';

@@ -26,6 +26,7 @@ var JiraIssue = require('../models/issue');
 var JiraStatus = require('../models/status.js');
 var JiraPriority = require('../models/priority.js');
 var JiraProject = require('../models/project.js');
+var JiraComponent = require('../models/component.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -489,6 +490,35 @@ module.exports.priorities = function() {
 
 module.exports.projects = function() {
     return apiListRoot(JiraProject, 'GET', '/rest/api/2/project');
+};
+
+/*
+ * Fetches projects, then fetches all components for each project
+ * keying them by project
+ * */
+module.exports.allComponents = function() {
+    return new Promise(function(resolve, reject) {
+        apiListRoot(JiraProject, 'GET', '/rest/api/2/project').then(function(response) {
+            var projects = response.data;
+            var promises = [];
+            _.each(projects, function(project) {
+                promises.push(apiListRoot(JiraComponent, 'GET', '/rest/api/2/project/' + project.id + '/components'))
+            });
+            Promise.all(promises).then(function(results) {
+                var result = [];
+                for (var i = 0; i < projects.length; i++) {
+                    result.push({
+                        key: projects[i].key,
+                        components: results[i].data
+                    });
+                }
+                // pass down data key for cache
+                resolve({
+                    data: result
+                });
+            }, reject);
+        }, reject);
+    });
 };
 
 module.exports.assignable = function(projectKey) {

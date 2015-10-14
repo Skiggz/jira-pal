@@ -17,6 +17,11 @@ module.exports.init = function(base64credentials) {
     creds = base64credentials;
 };
 
+/*
+* Models
+* */
+var JiraUser = require('../models/user');
+
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
         headers = headers || {};
@@ -446,6 +451,16 @@ module.exports.statuses = function() {
 
 module.exports.priorities = function() {
     return api('GET', '/rest/api/2/priority');
+};
+
+module.exports.assignable = function(projectKey) {
+    return new Promise(function(resolve, reject) {
+        api('GET', '/rest/api/2/user/assignable/search?project=' + projectKey).then(function(response) {
+            resolve(_.map(JSON.parse(response.payload), function(rawUser) {
+                return new JiraUser(rawUser);
+            }));
+        }, reject);
+    });
 };
 
 module.exports.queryBuilder = function() {

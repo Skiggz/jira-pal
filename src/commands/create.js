@@ -23,8 +23,23 @@ module.exports = function() {
                 issueTypeQuestion.choice(type.name);
             });
             print.ask(issueTypeQuestion).then(function(issueTypeAnswer) {
-                print.info('You are trying to create a ' + issueTypeAnswer.type + ' in ' + project.name);
-                print.info('Thanks! Bye now.');
+                var assigneeQuestion = print.question('list', 'assignee', 'Please select an assignee');
+                api.assignable(project.key).then(function(assignable) {
+                    assigneeQuestion.choice('None');
+                    _.each(assignable, function(assignee) {
+                        assigneeQuestion.choice(assignee.displayName);
+                    });
+                    print.ask(assigneeQuestion).then(function(answers) {
+                        var assignee = _.find(assignable, function(it) {
+                            return it.displayName === answers.assignee;
+                        });
+                        if (answers.assignee !== 'None') {
+                            print.info('You are trying to create a ' + issueTypeAnswer.type + ' in ' + project.name + ' assigned to ' + assignee.displayName);
+                        } else {
+                            print.info('You are trying to create a ' + issueTypeAnswer.type + ' in ' + project.name);
+                        }
+                    });
+                });
             });
         });
     });

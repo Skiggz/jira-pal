@@ -108,7 +108,9 @@ module.exports.question = function(type, answerKey, message) {
 };
 
 module.exports.ask = function(/* question args */) {
-    var questions = _.toArray(arguments);
+    var questions = _.filter(_.toArray(arguments), function(q) {
+        return (q.type !== 'list' && q.type !== 'checkbox') || q.choices.length > 0;
+    });
     return {
         then: function(callback) {
             question.prompt(questions, callback);

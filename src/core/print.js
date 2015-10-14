@@ -54,6 +54,11 @@ function Question(type, answerKey, message) {
         return self;
     };
 
+    this.separator = function() {
+        self.choices.push(new question.Separator());
+        return self;
+    };
+
     this.validIf = function(fn) {
         self.validate = fn;
         return self;

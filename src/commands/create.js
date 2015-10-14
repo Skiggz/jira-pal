@@ -24,7 +24,9 @@ module.exports = function() {
                 var assigneeQuestion = print.question('list', 'assignee', 'Please select an assignee');
                 api.assignable(project.key).then(function(response2) {
                     var assignable = response2.data;
+                    assigneeQuestion.separator();
                     assigneeQuestion.choice('None');
+                    assigneeQuestion.separator();
                     _.each(assignable, function(assignee) {
                         assigneeQuestion.choice(assignee.displayName);
                     });

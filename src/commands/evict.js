@@ -1,6 +1,7 @@
 var print = require('../core/print');
+var cache = require('../core/cache');
 module.exports = function() {
-    print.info('I do not do anything yet!');
+    cache.clear();
 };
 
 module.exports.requiresLogin = false;

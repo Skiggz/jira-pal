@@ -24,7 +24,6 @@
 
 * If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
   * Alias your local jira-pal jira.js file for ease of use
-  * Change your file location for storing creds and settings to maybe $HOME/jira-hacking or something so it doesn't conflict with your global install
 
 ##Usage
 

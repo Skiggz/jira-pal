@@ -43,6 +43,10 @@ function api(method, path, headers, data) {
                     print.fail('Not authorized. Logging you out');
                     logout();
                     reject(new Error('Unauthorized'));
+                    var deniedReason = res.headers['x-authentication-denied-reason'];
+                    if (deniedReason && deniedReason.indexOf('CAPTCHA_CHALLENGE') > -1) {
+                        print.fail('Your account has been locked. You need to LOGOUT and log back in manually via jira: ' + deniedReason.match(/login-url=(.*)/)[1]);
+                    }
                 } else {
                     resolve({
                         payload: payload,

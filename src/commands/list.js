@@ -10,6 +10,8 @@ module.exports = function() {
             statuses.display();
         } else if (command === 'p') {
             priorities.display();
+        } else {
+            print.info(command + ' not found.');
         }
     } else {
         print.info('You did not specify what you wanted to list. Do you need help? Type jira help.');

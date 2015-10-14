@@ -30,7 +30,6 @@ module.exports = function() {
         });
     }, function(error) {
         print.log('Failed to make request', error);
-        throw error;
     });
 };
 

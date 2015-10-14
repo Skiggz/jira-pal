@@ -11,6 +11,8 @@ var https = require('https');
 var settings = require('../data/settings');
 var _ = require('underscore');
 var _s = require('underscore.string');
+var print = require('./print');
+var logout = require('../commands/logout');
 var creds = null;
 module.exports.init = function(base64credentials) {
     creds = base64credentials;
@@ -31,24 +33,32 @@ function api(method, path, headers, data) {
             path: path,
             method: method,
             headers: headers
-        }, function(res) {
+        }, function (res) {
             var payload = '';
-            res.on('data', function(d) {
+            res.on('data', function (d) {
                 payload += d;
             });
-            res.on('end', function(d) {
-                // TODO: if not authorized, prompt to login
-                resolve({
-                    payload: payload,
-                    status: res.statusCode,
-                    headers: res.headers
-                });
+            res.on('end', function (d) {
+                if (res && (res.statusCode === 403 || res.statusCode === 401)) {
+                    print.fail('Not authorized. Logging you out');
+                    logout();
+                    reject(new Error('Unauthorized'));
+                } else {
+                    resolve({
+                        payload: payload,
+                        status: res.statusCode,
+                        headers: res.headers
+                    });
+                }
             });
         });
         if (data) {
             request.write(JSON.stringify(data));
         }
-        request.on('error', function(e) {
+        request.on('error', function (e) {
+            if (e && e.code === 'ECONNREFUSED') {
+                print.fail('Failed to connect. Did you run jira init? Please do this.');
+            }
             reject(e);
         });
         request.end();

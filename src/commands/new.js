@@ -168,3 +168,7 @@ module.exports = function() {
         });
     });
 };
+
+
+module.exports.moduleDescription = 'Create a new Jira issue.';
+module.exports.moduleDescriptionExtra = 'Currently does not support more than default fields.';

@@ -12,7 +12,6 @@ var settings = require('../data/settings');
 var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('./print');
-var logout = require('../commands/logout');
 var creds = null;
 module.exports.init = function(base64credentials) {
     creds = base64credentials;
@@ -40,8 +39,7 @@ function api(method, path, headers, data) {
             });
             res.on('end', function (d) {
                 if (res && (res.statusCode === 403 || res.statusCode === 401)) {
-                    print.fail('Not authorized. Logging you out');
-                    logout();
+                    print.fail('Not authorized. Try logging out and back in.');
                     reject(new Error('Unauthorized'));
                     var deniedReason = res.headers['x-authentication-denied-reason'];
                     if (deniedReason && deniedReason.indexOf('CAPTCHA_CHALLENGE') > -1) {

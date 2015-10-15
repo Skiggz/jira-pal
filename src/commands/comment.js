@@ -23,10 +23,10 @@ function comment(issueKey) {
         api.comment(issueKey, comments)
             .then(
                 function(r) {
-                    console.log('Your comment has been posted to', issueKey);
+                    print.success('Your comment has been posted to ' + issueKey);
                 },
                 function(e) {
-                    console.error('There was a problem posting your comment', e);
+                    print.error('There was a problem posting your comment ' + e ? e.message : '');
                 }
             );
     });

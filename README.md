@@ -45,6 +45,14 @@
   * Returns all stories you are assigned to, that fall under your default me statuses from `jira init`
 * `jira me foobar`
   * Returns all stories you are assigned to that search returns "foobar" for (i.e. search my stories)
+* `jira commit`
+  * Select issues from `jira me` or a search (like jira me) to include in a `git commit` message
+* `jira new`
+  * Create a new issue (default fields only supported at the moment, more to come)
+* `jira board`
+  * View the sprint board for a selected rapid board. 
+  * You may pass -a to include all users (default is just your username)
+  * Specify -p XXX to specify a rapid board by id (p for project, maybe not the best name)
 * `jira open`
   * Select from issues assigned to you and open it in your default web browser.
 * `jira open XXX-123`

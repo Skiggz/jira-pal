@@ -54,15 +54,18 @@
 * `jira open -s foobar`
   * Open an issue in your default web browser from ANY story that search returns for search criteria `foobar`
 * `jira comment`
-  * Select from issues assigned to you and then add a comment.
+  * Select from issues assigned to you and then add a comment
+    * You can @mention a user or [~username]
 * `jira comment XXX-123`
-  * Add comment to the specified issue.
+  * Add comment to the specified issue
 * `jira comment -s foobar`
   * Add comment to ANY story that search returns for search criteria `foobar`
 * `jira copy`
   * Copy a story key (id) from the result set returned by `jira me`
 * `jira copy foobar`
   * Copy a story id from ANY story that search returns for search criteria `foobar`
+* `jira user lookup foobar`
+  * Searches for a users where email, username or display name match `foobar`
 * `jira search`
   * Same as `jira me`
 * `jira search foobar`

@@ -542,12 +542,12 @@ module.exports.createMeta = function() {
     return apiList(JiraCreateTicketMeta, 'projects', 'GET', '/rest/api/2/issue/createmeta');
 };
 
-module.exports.queryBuilder = function() {
-    return new QueryBuilder();
-};
-
 module.exports.comment = function(issueKey, comments) {
     return api('POST', _s.sprintf('/rest/api/2/issue/%s/comment', issueKey), null, {
         body: comments
     });
+};
+
+module.exports.searchForUser = function(criteria) {
+    return api('GET', _s.sprintf('/rest/api/2/user/search?username=%s&maxResults=10', encodeURIComponent(criteria)), null, null);
 };

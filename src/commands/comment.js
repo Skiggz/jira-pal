@@ -2,15 +2,25 @@ var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('../core/print');
 var meQueryOrSearch = require('../util/me-query-or-search');
-var settings = require('../data/settings');
 var selectIssue = require('../util/select-issue');
 var api = require('../core/api');
+
+function transformMentions(comments) {
+    var matches = comments.match(/\B@[a-z0-9_-]+/gi);
+
+    _.each(matches, function(match) {
+        comments = comments.replace(match, _s.sprintf('[~%s]', match.substring(1)));
+    });
+
+    return comments;
+}
 
 function comment(issueKey) {
     print.ask(
         print.question('input', 'comment', 'Comment')
     ).then(function(answers) {
-        api.comment(issueKey, answers.comment)
+        var comments = transformMentions(answers.comment);
+        api.comment(issueKey, comments)
             .then(
                 function(r) {
                     console.log('Your comment has been posted to', issueKey);
@@ -32,7 +42,7 @@ module.exports = function() {
                 print.info('No stories matched your search criteria');
                 return;
             }
-            
+
             comment(issue.key);
         }, function(e) {
             print.fail('Failed to fetch issues ' + e ? e.message : '');

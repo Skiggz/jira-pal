@@ -6,6 +6,7 @@ var print = require('../core/print');
 var settings = require('../data/settings');
 var priorities = require('../data/jira/priorities');
 var components = require('../data/jira/components');
+var clipboard = require("copy-paste-no-exec");
 
 /*
 * For now, ignoring custom fields. This is just going
@@ -66,7 +67,18 @@ function complete(newIssue) {
         if (answer.createIssue) {
             api.createIssue(newIssue.toJS()).then(function(response) {
                 if (response.status === 201) {
-                    print.success('Story created: ' + JSON.parse(response.payload).key);
+                    var key = JSON.parse(response.payload).key;
+                    print.success('Story created: ' + key);
+                    print.ask(
+                        print.question('confirm', 'copy', 'Would you like to copy the story URL?')
+                    ).then(function(answer) {
+                        if (answer.copy) {
+                            var url = _s.sprintf('https://%s/browse/%s', settings.gett.url, key);
+                            clipboard.copy(url, function() {
+                                print.info('Copied story url ' + url + ' to your clipboard.');
+                            });
+                        }
+                    });
                 } else {
                     print.fail('Story failed to create, jira responded with \n\n' + response.payload + '\n');
                 }

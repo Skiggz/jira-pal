@@ -38,6 +38,10 @@ module.exports.log = function() {
     console.log.apply(console, _.toArray(arguments));
 };
 
+module.exports.pretty = function(jsonString) {
+    console.log(JSON.stringify(JSON.parse(jsonString), null, 2));
+};
+
 function Question(type, answerKey, message) {
 
     var self = this;

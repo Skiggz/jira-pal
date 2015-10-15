@@ -28,6 +28,7 @@ var JiraPriority = require('../models/priority.js');
 var JiraProject = require('../models/project.js');
 var JiraComponent = require('../models/component.js');
 var LabelSuggestion = require('../models/label-suggestion.js');
+var JiraRapidView = require('../models/rapid-view.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -550,4 +551,8 @@ module.exports.comment = function(issueKey, comments) {
 
 module.exports.searchForUser = function(criteria) {
     return apiListRoot(JiraUser, 'GET', _s.sprintf('/rest/api/2/user/search?username=%s&maxResults=10', encodeURIComponent(criteria)));
+};
+
+module.exports.rapidViews = function() {
+    return apiList(JiraRapidView, 'views', 'GET', '/rest/greenhopper/1.0/rapidview');
 };

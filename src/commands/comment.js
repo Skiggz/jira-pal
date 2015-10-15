@@ -4,16 +4,7 @@ var print = require('../core/print');
 var meQueryOrSearch = require('../util/me-query-or-search');
 var selectIssue = require('../util/select-issue');
 var api = require('../core/api');
-
-function transformMentions(comments) {
-    var matches = comments.match(/\B@[a-z0-9_-]+/gi);
-
-    _.each(matches, function(match) {
-        comments = comments.replace(match, _s.sprintf('[~%s]', match.substring(1)));
-    });
-
-    return comments;
-}
+var transformMentions = require('../util/transform-mentions');
 
 function comment(issueKey) {
     print.ask(

@@ -6,10 +6,11 @@ var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('./core/print');
 var api = require('./core/api');
-var commands = require('./core/commands');
+var login = require('./commands/login');
+var logout = require('./commands/logout');
 
 // bluebird setup
-Promise.onPossiblyUnhandledRejection(function(reason, promise) {
+Promise.onPossiblyUnhandledRejection(function(reason) {
     var why = reason && reason.message;
     // lots of api calls may 401/403 so we can consider this something to ignore
     if (why !== 'Unauthorized') {
@@ -26,11 +27,15 @@ Promise.onPossiblyUnhandledRejection(function(reason, promise) {
 
 // default command is help, and avoids index out of bounds errors
 var command = process.argv.length > 2 ? process.argv[2] : settings.gett.defaultCommand;
-
-if (!commands[command]) {
+var commands = _.map(fs.readdirSync(__dirname + '/commands'), function(filename) {
+    return filename.replace(/\.js$/, '');
+});
+if (commands.indexOf(command) === -1) {
     print.fail(_s.sprintf('Command "%s" not found.', command));
     command = 'help';
 }
+
+var commandFn = require('./commands/' + command);
 
 /*
 * Create arguments for commands excluding
@@ -38,7 +43,7 @@ if (!commands[command]) {
 * */
 var args = _.toArray(process.argv).slice(3);
 var runCommand = function() {
-    commands[command].apply(this, args);
+    commandFn.apply(this, args);
 };
 
 /*
@@ -55,20 +60,20 @@ var updateApi = function(credentials) {
 };
 
 // commands can specify to not require login (MUST specify false though)
-if (commands[command].requiresLogin !== false) {
+if (commandFn.requiresLogin !== false) {
     /*
      * Check to see if the credentials module exists, if not
      * create it.
      * */
     var location = settings.credsLocation();
     if (!fs.existsSync(location)) {
-        commands.logout();
+        logout();
     }
 
     var creds = require(location.replace(/\.js$/, ''));
 
     if (creds === null) {
-        commands.login().then(function(newCreds) {
+        login().then(function(newCreds) {
             updateApi(newCreds);
         }, _.noop);
     } else {

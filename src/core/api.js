@@ -493,6 +493,10 @@ module.exports.projects = function() {
     return apiListRoot(JiraProject, 'GET', '/rest/api/2/project');
 };
 
+module.exports.issue = function(key) {
+    return apiItem(JiraIssue, 'GET', '/rest/api/2/issue/' + key);
+};
+
 /*
  * Fetches projects, then fetches all components for each project
  * keying them by project

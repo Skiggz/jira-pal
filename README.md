@@ -49,6 +49,8 @@
   * Select from issues assigned to you and open it in your default web browser.
 * `jira open XXX-123`
   * Opens the issue in your default web browser.
+* `jira issue XXX-123`
+  * JSON Representation of specified issue. Pass story ID or key, and optionally `-a` to include all fields
 * `jira open -s foobar`
   * Open an issue in your default web browser from ANY story that search returns for search criteria `foobar`
 * `jira copy`

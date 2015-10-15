@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('../core/print');
-var selectIssue = require('../util/select-issue');
 var api = require('../core/api');
 
 module.exports = function() {
@@ -12,16 +11,14 @@ module.exports = function() {
         case 'lookup':
             api.searchForUser(args.join(' '))
                 .then(
-                    function(r) {
-                        var data = JSON.parse(r.payload, 'UTF-8'),
-                            rows = _.map(data, function(it) {
-                                return [it.displayName, it.name, it.emailAddress];
-                            });
-
+                    function(response) {
+                        var users = response.data;
+                        var rows = _.map(users, function(user) {
+                            return [user.displayName, user.name, user.emailAddress];
+                        });
                         print.table([ 'Name', 'Username', 'Email' ], rows, {
                             widths: [ 30, 30, 60 ]
                         });
-
                     },
                     function(e) {
                         console.error('There was a problem looking up users', e);

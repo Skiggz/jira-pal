@@ -549,5 +549,5 @@ module.exports.comment = function(issueKey, comments) {
 };
 
 module.exports.searchForUser = function(criteria) {
-    return api('GET', _s.sprintf('/rest/api/2/user/search?username=%s&maxResults=10', encodeURIComponent(criteria)), null, null);
+    return apiListRoot(JiraUser, 'GET', _s.sprintf('/rest/api/2/user/search?username=%s&maxResults=10', encodeURIComponent(criteria)));
 };

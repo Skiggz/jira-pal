@@ -4,22 +4,23 @@ var print = require('../core/print');
 var meQueryOrSearch = require('../util/me-query-or-search');
 var selectIssue = require('../util/select-issue');
 var api = require('../core/api');
+var vim = require('../util/vim');
 var transformMentions = require('../util/transform-mentions');
 
 function comment(issueKey) {
-    print.ask(
-        print.question('input', 'comment', 'Comment')
-    ).then(function(answers) {
-        var comments = transformMentions(answers.comment);
+    var header = '\n# Please enter your comment and then save and quit. \n' +
+        '# These lines and everything below them will be discarded.\n';
+    vim(header, true).then(function(result) {
+        var comments = transformMentions(_s.trim(result.contents.replace(/#.*/g, '')))
         api.comment(issueKey, comments)
             .then(
-                function(r) {
-                    print.success('Your comment has been posted to ' + issueKey);
-                },
-                function(e) {
-                    print.error('There was a problem posting your comment ' + e ? e.message : '');
-                }
-            );
+            function(r) {
+                print.success('Your comment has been posted to ' + issueKey);
+            },
+            function(e) {
+                print.error('There was a problem posting your comment ' + e ? e.message : '');
+            }
+        );
     });
 }
 

@@ -27,6 +27,7 @@ var JiraStatus = require('../models/status.js');
 var JiraPriority = require('../models/priority.js');
 var JiraProject = require('../models/project.js');
 var JiraComponent = require('../models/component.js');
+var LabelSuggestion = require('../models/label-suggestion.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -519,6 +520,10 @@ module.exports.allComponents = function() {
             }, reject);
         }, reject);
     });
+};
+
+module.exports.labels = function(token) {
+    return apiItem(LabelSuggestion, 'GET', '/rest/api/1.0/labels/suggest?query=' + token);
 };
 
 module.exports.assignable = function(projectKey) {

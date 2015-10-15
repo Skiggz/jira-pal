@@ -11,16 +11,20 @@ function comment(issueKey) {
     var header = '\n# Please enter your comment and then save and quit. \n' +
         '# These lines and everything below them will be discarded.\n';
     vim(header, true).then(function(result) {
-        var comments = transformMentions(_s.trim(result.contents.replace(/#.*/g, '')))
-        api.comment(issueKey, comments)
-            .then(
-            function(r) {
-                print.success('Your comment has been posted to ' + issueKey);
-            },
-            function(e) {
-                print.error('There was a problem posting your comment ' + e ? e.message : '');
-            }
-        );
+        var comments = transformMentions(_s.trim(result.contents.replace(/#.*/g, '')));
+        if (!comments) {
+            print.fail('No comment provided');
+        } else {
+            api.comment(issueKey, comments)
+                .then(
+                function(r) {
+                    print.success('Your comment has been posted to ' + issueKey);
+                },
+                function(e) {
+                    print.error('There was a problem posting your comment ' + e ? e.message : '');
+                }
+            );
+        }
     });
 }
 

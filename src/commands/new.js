@@ -61,6 +61,61 @@ function BlankIssue(reporter, summary) {
 
 }
 
+function complete(newIssue) {
+    print.info('Create story?');
+    print.info(JSON.stringify(newIssue.toJS(), null, 2));
+}
+
+function labeler(newIssue, answer) {
+    if (answer.addLabels) {
+        print.ask(
+            print.question('input', 'suggestion', 'Enter new label name or search criteria')
+        ).then(function(suggestions) {
+                var s = _s.clean(suggestions.suggestion);
+                if (s) {
+                    api.labels(s).then(function(response) {
+                        var labelSuggestion = response.data;
+                        var whichLabelsToAdd =
+                            print.question(
+                                'checkbox',
+                                'labels',
+                                'Select labels from below (selecting first option will create it)'
+                            ).checkbox(s);
+                        _.each(labelSuggestion.suggestions, function(it) {
+                            whichLabelsToAdd.checkbox(it);
+                        });
+                        print.ask(whichLabelsToAdd).then(function(labelsAnswer) {
+                            _.each(labelsAnswer.labels, function(label) {
+                                newIssue.labels.push(label);
+                            });
+                            print.ask(
+                                print.question(
+                                    'confirm',
+                                    'addLabels',
+                                    'Continue adding/searching labels?'
+                                )
+                            ).then(function(addLabelsAswer) {
+                                labeler(newIssue, addLabelsAswer);
+                            });
+                        });
+                    });
+                } else {
+                    complete(newIssue);
+                }
+            });
+    } else {
+        complete(newIssue);
+    }
+}
+
+function addLabelsOrFinish(newIssue) {
+    print.ask(
+        print.question('confirm', 'addLabels', 'Would you like to add labels?')
+    ).then(function(addLabelsAswer) {
+        labeler(newIssue, addLabelsAswer);
+    });
+}
+
 module.exports = function() {
     if (!settings.gett.username) {
         return print.fail('Please run `jira init` and set your jira username so that you can report issues.');
@@ -159,8 +214,7 @@ module.exports = function() {
                                 newIssue.assigneeName = assignee && assignee.name;
                                 newIssue.priorityId = priority.id;
                                 newIssue.description = metaAnswers.description;
-                                print.info('Create story?');
-                                print.info(JSON.stringify(newIssue.toJS(), null, 2));
+                                addLabelsOrFinish(newIssue);
                             });
                         });
                     });

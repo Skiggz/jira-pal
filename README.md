@@ -19,7 +19,7 @@
 * Yep, it's still young. If you encounter a bug, please add a github issue
 * If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`.
   * These are always safe bets to start over.
-  
+
 ##Hacking
 
 * If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
@@ -53,10 +53,19 @@
   * JSON Representation of specified issue. Pass story ID or key, and optionally `-a` to include all fields
 * `jira open -s foobar`
   * Open an issue in your default web browser from ANY story that search returns for search criteria `foobar`
+* `jira comment`
+  * Select from issues assigned to you and then add a comment
+    * You can @mention a user or [~username]
+* `jira comment XXX-123`
+  * Add comment to the specified issue
+* `jira comment -s foobar`
+  * Add comment to ANY story that search returns for search criteria `foobar`
 * `jira copy`
   * Copy a story key (id) from the result set returned by `jira me`
 * `jira copy foobar`
   * Copy a story id from ANY story that search returns for search criteria `foobar`
+* `jira user lookup foobar`
+  * Searches for a users where email, username or display name match `foobar`
 * `jira search`
   * Same as `jira me`
 * `jira search foobar`

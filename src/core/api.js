@@ -497,6 +497,10 @@ module.exports.issue = function(key) {
     return apiItem(JiraIssue, 'GET', '/rest/api/2/issue/' + key);
 };
 
+module.exports.createIssue = function(data) {
+    return api('POST', '/rest/api/2/issue', null, data);
+};
+
 /*
  * Fetches projects, then fetches all components for each project
  * keying them by project

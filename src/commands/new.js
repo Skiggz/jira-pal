@@ -62,8 +62,25 @@ function BlankIssue(reporter, summary) {
 }
 
 function complete(newIssue) {
-    print.info('Create story?');
+    print.info('The following story will be created:');
     print.info(JSON.stringify(newIssue.toJS(), null, 2));
+    print.ask(
+        print.question('confirm', 'createIssue', 'Create the story described above? Note, this is super beta and may not work.')
+    ).then(function(answer) {
+        if (answer.createIssue) {
+            api.createIssue(newIssue).then(function(response) {
+                if (response.status === 201) {
+                    print.success('Story created: ' + JSON.parse(response.payload).key);
+                } else {
+                    print.fail('Story failed to create, jira responded with \n\n' + response.payload + '\n');
+                }
+            }, function(e) {
+                print.fail(_s.sprintf('Failed to create new issue because %s', e && e.message));
+            });
+        } else {
+            print.fail('Issue was not created');
+        }
+    });
 }
 
 function labeler(newIssue, answer) {

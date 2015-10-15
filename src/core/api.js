@@ -541,3 +541,13 @@ module.exports.assignable = function(projectKey) {
 module.exports.createMeta = function() {
     return apiList(JiraCreateTicketMeta, 'projects', 'GET', '/rest/api/2/issue/createmeta');
 };
+
+module.exports.queryBuilder = function() {
+    return new QueryBuilder();
+};
+
+module.exports.comment = function(issueKey, comments) {
+    return api('POST', _s.sprintf('/rest/api/2/issue/%s/comment', issueKey), null, {
+        body: comments
+    });
+};

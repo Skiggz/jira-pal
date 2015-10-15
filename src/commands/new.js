@@ -98,7 +98,9 @@ function labeler(newIssue, answer) {
                                 'labels',
                                 'Select labels from below (selecting first option will create it)'
                             ).checkbox(s);
-                        _.each(labelSuggestion.suggestions, function(it) {
+                        _.each(_.filter(labelSuggestion.suggestions, function(sug) {
+                            return sug !== s;
+                        }), function(it) {
                             whichLabelsToAdd.checkbox(it);
                         });
                         print.ask(whichLabelsToAdd).then(function(labelsAnswer) {

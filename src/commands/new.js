@@ -6,7 +6,9 @@ var print = require('../core/print');
 var settings = require('../data/settings');
 var priorities = require('../data/jira/priorities');
 var components = require('../data/jira/components');
+var vim = require('../util/vim');
 var clipboard = require("copy-paste-no-exec");
+var transformMentions = require('../util/transform-mentions');
 
 /*
 * For now, ignoring custom fields. This is just going
@@ -168,7 +170,6 @@ module.exports = function() {
                 .validIf(function(input) {
                     return !!_s.clean(input) || 'Please input a summary';
                 });
-            var descriptionQuestion = print.question('input', 'description', 'Story description (Not Required)');
             var priorityQuestion = print.question('list', 'priority', 'Select a priority for this story');
             var componentsQuestion = print.question('checkbox', 'components', 'Select components for this story');
 
@@ -203,7 +204,6 @@ module.exports = function() {
                     print.ask(
                         issueTypeQuestion,
                         summaryQuestion,
-                        descriptionQuestion,
                         priorityQuestion,
                         componentsQuestion
                     ).then(function(metaAnswers) {
@@ -240,8 +240,20 @@ module.exports = function() {
                                 newIssue.issueTypeId = issueType.id;
                                 newIssue.assigneeName = assignee && assignee.name;
                                 newIssue.priorityId = priority.id;
-                                newIssue.description = metaAnswers.description;
-                                addLabelsOrFinish(newIssue);
+                                print.ask(
+                                    print.question('confirm', 'desc', 'Add description?')
+                                ).then(function(descriptionAnswer) {
+                                    if (descriptionAnswer.desc) {
+                                        var header = '\n# Please enter a description and then save and quit. \n' +
+                                            '# These lines and everything below them will be discarded.\n';
+                                        vim(header, true).then(function(result) {
+                                            newIssue.description = transformMentions(_s.clean(result.contents.replace(/#.*/g, '')));
+                                            addLabelsOrFinish(newIssue);
+                                        });
+                                    } else {
+                                        addLabelsOrFinish(newIssue);
+                                    }
+                                });
                             });
                         });
                     });

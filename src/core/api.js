@@ -29,6 +29,7 @@ var JiraProject = require('../models/project.js');
 var JiraComponent = require('../models/component.js');
 var LabelSuggestion = require('../models/label-suggestion.js');
 var JiraRapidView = require('../models/rapid-view.js');
+var JiraRapidBoard = require('../models/rapid-board.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -555,4 +556,8 @@ module.exports.searchForUser = function(criteria) {
 
 module.exports.rapidViews = function() {
     return apiList(JiraRapidView, 'views', 'GET', '/rest/greenhopper/1.0/rapidview');
+};
+
+module.exports.getRapidBoardView = function(rapidViewId) {
+    return apiItem(JiraRapidBoard, 'GET', _s.sprintf('/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=%s', rapidViewId));
 };

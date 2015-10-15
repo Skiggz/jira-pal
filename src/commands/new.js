@@ -11,14 +11,13 @@ var components = require('../data/jira/components');
 * For now, ignoring custom fields. This is just going
 * to be a generic, jira default. Custom fields are a TODO
 * */
-function BlankIssue(reporter, summary) {
+function BlankIssue(summary) {
 
     var self = this;
     this.projectId = null;
     this.summary = summary;
     this.issueTypeId = null;
     this.assigneeName = null;
-    this.reporterName = reporter;
     this.priorityId = null;
     this.labels = [];
     this.description = null;
@@ -38,9 +37,6 @@ function BlankIssue(reporter, summary) {
         }
         if (self.assigneeName ) {
             obj.fields.assignee = { name: self.assigneeName };
-        }
-        if (self.reporterName ) {
-            obj.fields.reporter = { name: self.reporterName };
         }
         if (self.priorityId ) {
             obj.fields.priority = { id: self.priorityId };
@@ -65,10 +61,10 @@ function complete(newIssue) {
     print.info('The following story will be created:');
     print.info(JSON.stringify(newIssue.toJS(), null, 2));
     print.ask(
-        print.question('confirm', 'createIssue', 'Create the story described above? Note, this is super beta and may not work.')
+        print.question('confirm', 'createIssue', 'Create the story described above?')
     ).then(function(answer) {
         if (answer.createIssue) {
-            api.createIssue(newIssue).then(function(response) {
+            api.createIssue(newIssue.toJS()).then(function(response) {
                 if (response.status === 201) {
                     print.success('Story created: ' + JSON.parse(response.payload).key);
                 } else {
@@ -219,7 +215,7 @@ module.exports = function() {
                                     return it.name === metaAnswers.priority;
                                 });
                                 var componentNames = metaAnswers.components || [];
-                                var newIssue = new BlankIssue(settings.gett.username, metaAnswers.summary);
+                                var newIssue = new BlankIssue(metaAnswers.summary);
                                 _.each(componentNames, function(name) {
                                     var comp = _.find(currentComponents, function(c) {
                                         return c.name === name;

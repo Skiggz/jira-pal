@@ -117,7 +117,7 @@ function QueryBuilder() {
     this.query = {
         jql: '',
         startAt: 0,
-        maxResults: 10,
+        maxResults: 25,
         fields: [
             'summary',
             'issuetype',

@@ -1,6 +1,7 @@
 var settings = require('../data/settings');
 var question = require('inquirer');
 var _ = require('underscore');
+var _s = require('underscore.string');
 var colors = require('colors/safe');
 // cliff tables are smaller and easier to display heavier data sets
 var cliff = require('cliff');
@@ -138,6 +139,17 @@ module.exports.table = function(header, rows, options) {
         };
         if (options.widths) {
             tableOptions.colWidths = options.widths;
+            _.each(rows, function(row) {
+                /*
+                * Wrap all the rows by the specified size of the row instead of ellipsing
+                * the - 10 is to prevent long words from overflowing in most cases. still possible to ellipse
+                * but I prefer this over cutting the words off
+                */
+                _.each(options.widths, function(width, index) {
+                    // terminal does not like \r, remove them and replace tabs with spaces
+                    row[index] = _s.wrap(row[index], { width: Math.max(10, width - 10) }).replace(/\r/g, '').replace(/\t/, '  ');
+                });
+            });
         }
         var table = new Table(tableOptions);
         _.each(rows, function(row) {

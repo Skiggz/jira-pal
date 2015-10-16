@@ -1,6 +1,16 @@
 #Jira Pal
 
-####Jira UI can be a bit busy sometimes. This tool aims to simplify jira use for terminal users
+####A jira terminal tool aimed to reduce or eliminate the need for the UI. Jira pal wants to save you a browser tab :)
+
+##What People Are Probably Saying
+
+>Wow!
+
+>I never knew life without the JIRA UI, this is life changing!
+
+>I can't believe it's not butter! I'd totally put it on some toast. 
+
+And many other positive things :D
 
 ##Installation
 

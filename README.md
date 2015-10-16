@@ -20,11 +20,6 @@
 * If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`.
   * These are always safe bets to start over.
 
-##Hacking
-
-* If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
-  * Alias your local jira-pal jira.js file for ease of use
-
 ##Usage
 
 * `jira <command> <options`
@@ -112,7 +107,11 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * `search`, `me` and `copy` commands all search using "text contains ____" where the blank is whatever you type
   * Example: `jira search foobar` is actually doing a JQL search of "text contains foobar"
 
+##Hacking
 
+* If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
+  * Alias your local jira-pal jira.js file for ease of use
+  
 ##Settings
 
 * Default settings are stored in `data/settings.js`

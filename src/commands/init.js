@@ -50,6 +50,7 @@ module.exports = function() {
         print.question('input', 'username', 'Please enter your jira username (optional)'),
         print.question('input', 'defaultCommand', 'Input a default command if you do not want "help" to be the default. (Suggested: me)'),
         print.question('input', 'defaultMeStatuses', 'Input default statuses for jira me command (CSV)').defaultTo('In Progress'),
+        print.question('confirm', 'useActiveSprintsForMeCommand', 'Only pull back active sprint stories for me command?'),
         print.question('input', 'orderByDefault', 'Would you like to order "me" commands by a particular field? (Rank, Priority, etc..)')
     ).then(function(answers) {
             settings.url = answers.url.replace(/\/+$/, ''); // replace trailing slashes
@@ -63,6 +64,9 @@ module.exports = function() {
             }
             if (answers.orderByDefault) {
                 settings.orderByDefault = answers.orderByDefault;
+            }
+            if (answers.useActiveSprintsForMeCommand) {
+                settings.useActiveSprintsForMeCommand = answers.useActiveSprintsForMeCommand;
             }
             if (answers.defaultMeStatuses) {
                 settings.defaultMeStatuses = _.map(answers.defaultMeStatuses.split(','), function(status) {

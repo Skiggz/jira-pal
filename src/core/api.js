@@ -173,6 +173,10 @@ function QueryBuilder() {
             }
             return self.search;
         },
+        inOpenSprints: function() {
+            self.query.jql = _s.sprintf('%s AND sprint in openSprints()', self.query.jql);
+            return self.search;
+        },
         // operators
         equals: function(subQuery) {
             self.query.jql = _s.sprintf('%s = %s ', self.query.jql, subQuery);

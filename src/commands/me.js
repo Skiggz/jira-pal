@@ -15,6 +15,9 @@ module.exports = function() {
         if (settings.gett.orderByDefault) {
             query.orderBy(settings.gett.orderByDefault)
         }
+        if (settings.gett.useActiveSprintsForMeCommand) {
+            query.inOpenSprints();
+        }
     }
     api.search(query).then(function(response) {
         var issues = response.data;

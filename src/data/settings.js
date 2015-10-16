@@ -10,7 +10,8 @@ var settings = {
     defaultCommand: 'help',
     defaultMeStatuses: ["In Progress"],
     directory: process.env['JIRA_PAL_HOME'] || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
-    orderByDefault: null
+    orderByDefault: null,
+    useActiveSprintsForMeCommand: false
 };
 
 /*

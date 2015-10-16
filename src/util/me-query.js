@@ -9,5 +9,8 @@ module.exports = function() {
     if (settings.gett.orderByDefault) {
         query.orderBy(settings.gett.orderByDefault)
     }
+    if (settings.gett.useActiveSprintsForMeCommand) {
+        query.inOpenSprints();
+    }
     return query;
 };

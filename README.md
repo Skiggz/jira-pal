@@ -55,6 +55,8 @@
   * Specify -p XXX to specify a rapid board by id (p for project, maybe not the best name)
 * `jira open`
   * Select from issues assigned to you and open it in your default web browser.
+* `jira flow`
+  * Transition an issue. This is the "workflow" part of jira. Currently only supports basic transitions. If you have field requirements, this won't work yet.
 * `jira open XXX-123`
   * Opens the issue in your default web browser.
 * `jira issue XXX-123`

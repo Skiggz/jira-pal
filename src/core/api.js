@@ -30,6 +30,7 @@ var JiraComponent = require('../models/component.js');
 var LabelSuggestion = require('../models/label-suggestion.js');
 var JiraRapidView = require('../models/rapid-view.js');
 var JiraRapidBoard = require('../models/rapid-board.js');
+var JiraTransition = require('../models/transition.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -560,4 +561,12 @@ module.exports.rapidViews = function() {
 
 module.exports.getRapidBoardView = function(rapidViewId) {
     return apiItem(JiraRapidBoard, 'GET', _s.sprintf('/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=%s', rapidViewId));
+};
+
+module.exports.getTransitions = function(issueIdOrKey) {
+    return apiList(JiraTransition, 'transitions', 'GET', _s.sprintf('/rest/api/2/issue/%s/transitions', issueIdOrKey));
+};
+
+module.exports.transition = function(issueIdOrKey, details) {
+    return api('POST', _s.sprintf('/rest/api/2/issue/%s/transitions', issueIdOrKey), null, details);
 };

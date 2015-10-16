@@ -21,6 +21,23 @@
   "bin": {
     "jira": "./bin.js"
   },
+  "scripts": {
+    "test": "mocha --reporter dot --bail"
+  },
+  "devDependencies": {
+    "mocha": "~2.3.3",
+    "expect": "~1.12.1"
+  },
+  "contributors": [
+    {
+      "name": "Skylar Lowery",
+      "email": "skylar.lowery21@gmail.com"
+    },
+    {
+      "name": "Matt Elliott",
+      "email": "mattdelliott@me.com"
+    }
+  ],
   "main": "src/jira.js",
   "repository": "https://github.com/Skiggz/jira-pal",
   "author": "Skylar Lowery <skylar.lowery21@gmail.com>",

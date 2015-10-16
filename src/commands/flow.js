@@ -5,11 +5,10 @@ var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('../core/print');
 var selectIssue = require('../util/select-issue');
-var vim = require('../util/vim');
+var vim = require('../util/jira-style-vim-fetch');
 var clipboard = require("copy-paste-no-exec");
 var meQueryOrSearch = require('../util/me-query-or-search');
 var api = require('../core/api');
-var transformMentions = require('../util/transform-mentions');
 
 function getJiraTransitionBody(transitionId, comments) {
     var obj = {
@@ -69,10 +68,11 @@ module.exports = function() {
                 ).then(function(commentAnswer) {
                     if (commentAnswer.comment) {
                         // get comments
-                        var header = '\n# Please enter your comment and then save and quit. \n' +
-                            '# These lines and everything below them will be discarded.\n';
-                        vim(header, true).then(function(result) {
-                            var comments = transformMentions(_s.trim(result.contents.replace(/#.*/g, '')));
+                        var header = [
+                            'Please enter your comment and then save and quit.',
+                            'Empty comments will be discarded (excluded)'
+                        ];
+                        vim(header).then(function(comments) {
                             if (comments) {
                                 print.info(comments);
                                 complete(issue, transition, comments);

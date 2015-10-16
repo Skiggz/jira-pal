@@ -6,9 +6,8 @@ var print = require('../core/print');
 var settings = require('../data/settings');
 var priorities = require('../data/jira/priorities');
 var components = require('../data/jira/components');
-var vim = require('../util/vim');
+var vim = require('../util/jira-style-vim-fetch');
 var clipboard = require("copy-paste-no-exec");
-var transformMentions = require('../util/transform-mentions');
 
 /*
 * For now, ignoring custom fields. This is just going
@@ -244,10 +243,8 @@ module.exports = function() {
                                     print.question('confirm', 'desc', 'Add description?')
                                 ).then(function(descriptionAnswer) {
                                     if (descriptionAnswer.desc) {
-                                        var header = '\n# Please enter a description and then save and quit. \n' +
-                                            '# These lines and everything below them will be discarded.\n';
-                                        vim(header, true).then(function(result) {
-                                            newIssue.description = transformMentions(_s.clean(result.contents.replace(/#.*/g, '')));
+                                        vim('Please enter a description and then save and quit.').then(function(result) {
+                                            newIssue.description = result;
                                             addLabelsOrFinish(newIssue);
                                         });
                                     } else {

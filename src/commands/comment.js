@@ -4,14 +4,14 @@ var print = require('../core/print');
 var meQueryOrSearch = require('../util/me-query-or-search');
 var selectIssue = require('../util/select-issue');
 var api = require('../core/api');
-var vim = require('../util/vim');
-var transformMentions = require('../util/transform-mentions');
+var vim = require('../util/jira-style-vim-fetch');
 
 function comment(issueKey) {
-    var header = '\n# Please enter your comment and then save and quit. \n' +
-        '# These lines and everything below them will be discarded.\n';
-    vim(header, true).then(function(result) {
-        var comments = transformMentions(_s.trim(result.contents.replace(/#.*/g, '')));
+    var header = [
+        'Please enter your comment and then save and quit.',
+        'Empty comments will be discarded and cancelled.'
+    ];
+    vim(header).then(function(comments) {
         if (!comments) {
             print.fail('No comment provided');
         } else {

@@ -570,3 +570,11 @@ module.exports.getTransitions = function(issueIdOrKey) {
 module.exports.transition = function(issueIdOrKey, details) {
     return api('POST', _s.sprintf('/rest/api/2/issue/%s/transitions', issueIdOrKey), null, details);
 };
+
+module.exports.watch = function(issueIdOrKey) {
+    return api('POST', _s.sprintf('/rest/api/2/issue/%s/watchers', issueIdOrKey), null, settings.gett.username);
+};
+
+module.exports.unwatch = function(issueIdOrKey) {
+    return api('DELETE', _s.sprintf('/rest/api/2/issue/%s/watchers?username=%s', issueIdOrKey, settings.gett.username), null, null);
+};

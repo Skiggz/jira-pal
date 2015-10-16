@@ -63,7 +63,7 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * `jira new`
   * Create a new issue (default fields only supported at the moment, more to come)
 * `jira board`
-  * View the sprint board for a selected rapid board. 
+  * View the sprint board for a selected rapid board.
   * You may pass -a to include all users (default is just your username)
   * Specify -p XXX to specify a rapid board by id (p for project, maybe not the best name)
 * `jira open`
@@ -83,6 +83,24 @@ There is obviously a lot of enhancements coming, but I think the above commands 
   * Add comment to the specified issue
 * `jira comment -s foobar`
   * Add comment to ANY story that search returns for search criteria `foobar`
+* `jira watch`
+  * Select from issues assigned to you to watch
+* `jira watch XXX-123`
+  * Watch the specified issue
+* `jira watch -s foobar`
+  * Watch ANY story that search returns for search criteria `foobar`
+* `jira unwatch`
+  * Select from issues assigned to you to stop watching
+* `jira unwatch XXX-123`
+  * Stop watching the specified issue
+* `jira unwatch -s foobar`
+  * Stop watching ANY story that search returns for search criteria `foobar`
+* `jira describe`
+  * Describe an issue assigned to you
+* `jira describe XXX-123`
+  * Describe a specific issue
+* `jira describe -s foobar`
+  * Describe ANY story that search returns for search criteria `foobar`
 * `jira copy`
   * Copy a story key (id) from the result set returned by `jira me`
 * `jira copy foobar`
@@ -111,7 +129,7 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 
 * If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
   * Alias your local jira-pal jira.js file for ease of use
-  
+
 ##Settings
 
 * Default settings are stored in `data/settings.js`

@@ -24,5 +24,6 @@ module.exports = function JiraFields(dataObject) {
     this.assignee = _.has(dataObject, 'assignee') ? new JiraUser(dataObject.assignee) : null;
     this.updated = _.has(dataObject, 'updated') ? new Date(dataObject.updated) : null;
     this.status = _.has(dataObject, 'status') ? new JiraStatus(dataObject.status) : null;
+    this.description = _.has(dataObject, 'description') ? dataObject.description : null;
 
 };

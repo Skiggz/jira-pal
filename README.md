@@ -30,6 +30,9 @@ And many other positive things :D
 * If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`.
   * These are always safe bets to start over.
 
+##Possible Issues with installing (errors about fetching dependencies)
+* Make sure you have an SSH key setup in git :)
+
 ##Usage
 
 * `jira <command> <options`

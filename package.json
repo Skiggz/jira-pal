@@ -1,7 +1,7 @@
 {
   "name": "jira-pal",
   "private": false,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Jira Terminal Pal",
   "keywords": [],
   "dependencies": {
@@ -9,7 +9,7 @@
     "cli-table": "~0.3.1",
     "cliff": "~0.1.10",
     "colors": "~1.1.2",
-    "copy-paste-no-exec": "https://github.com/Skiggz/node-copy-paste#1.0.0",
+    "copy-paste-no-exec": "git+ssh://git@github.com:Skiggz/node-copy-paste#1.0.0",
     "inquirer": "^0.10.1",
     "moment": "~2.10.3",
     "numeral": "~1.5.3",

@@ -37,6 +37,21 @@ And many other positive things :D
 
 * `jira <command> <options`
 
+##Setup via init 
+
+* You want to run `jira init`
+* You want to get your jira url and username correct ;)
+* You want to make sure you include a list of applicable statuses that you want to see when you run jira me, because they are used for a lot of commands
+  * For example, with my jira distribution, we have "Started" and "In Review" along with "In Progress" so when `jira init` asks me what statuses to use, I enter: `In Progress,Started,In Review`
+* You probably want to sort your stories for me commands by rank or priority.
+  * So when it asks me, I put `Rank` to get my stories coming back in the order they are in in our backlog
+* You probably want to set your me command stories to come back only if they are in active sprints, so answer the last question "yes"
+
+One last note about setup, the reason you keep hearing "me" commands is that the general premise of the application is 
+that most commands default to your "me" commands unless otherwise specified, either by search criteria or the nature of 
+the particular command you are using. So you'll have a much better time if you pick statuses for your "me" commands that 
+make sense to you and what you want.
+
 ##TLDR
 
 Examples can be found below under "Examples" or by running `jira help`. But if you're just getting started, try:

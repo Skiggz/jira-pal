@@ -1,8 +1,7 @@
 var _ = require('underscore');
 var _s = require('underscore.string');
 var print = require('../core/print');
-var meQueryOrSearch = require('../util/me-query-or-search');
-var selectIssue = require('../util/select-issue');
+var meKeyOrSearch = require('../util/me-key-or-search');
 var api = require('../core/api');
 var vim = require('../util/jira-style-vim-fetch');
 
@@ -38,23 +37,11 @@ function comment(issueKey) {
 }
 
 module.exports = function() {
-    var args = Array.prototype.slice.call(arguments),
-        searchOrKey = args.shift();
-
-    if(!searchOrKey || searchOrKey == '-s') {
-        selectIssue(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(issue) {
-            if (!issue) {
-                print.info('No stories matched your search criteria');
-                return;
-            }
-
-            comment(issue.key);
-        }, function(e) {
-            print.fail('Failed to fetch issues ' + e ? e.message : '');
-        });
-    } else {
-        comment(searchOrKey);
-    }
+    meKeyOrSearch.apply(this, arguments)
+        .then(
+            comment,
+            _.noop
+        );
 };
 
 module.exports.moduleDescription = 'Comment on specific issue or search with -s and select, then enter in comments.';

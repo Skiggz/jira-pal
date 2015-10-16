@@ -1,9 +1,7 @@
-var _ = require('underscore');
 var _s = require('underscore.string');
-var print = require('../core/print');
-var meQueryOrSearch = require('../util/me-query-or-search');
+var _ = require('underscore');
 var settings = require('../data/settings');
-var selectIssue = require('../util/select-issue');
+var meKeyOrSearch = require('../util/me-key-or-search');
 var open = require('open');
 
 function openIssue(id) {
@@ -11,22 +9,11 @@ function openIssue(id) {
 }
 
 module.exports = function() {
-    var args = Array.prototype.slice.call(arguments),
-        searchOrKey = args.shift();
-
-    if(!searchOrKey || searchOrKey == '-s') {
-        selectIssue(meQueryOrSearch.apply(this, _.toArray(arguments))).then(function(issue) {
-            if (!issue) {
-                print.info('No stories matched your search criteria');
-                return;
-            }
-            openIssue(issue.key);
-        }, function(e) {
-            print.fail('Failed to fetch issues ' + e ? e.message : '');
-        });
-    } else {
-        openIssue(searchOrKey);
-    }
+    meKeyOrSearch.apply(this, arguments)
+        .then(
+            openIssue,
+            _.noop
+        );
 };
 
 module.exports.moduleDescription = 'Open specific issue or search with -s and select';

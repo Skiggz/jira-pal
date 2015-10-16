@@ -12,6 +12,9 @@ module.exports = function() {
     var query = meQueryOrSearch.apply(this, _.toArray(arguments));
     if (arguments.length > 0) {
         query = query.and().fields.assignee().equals(settings.gett.username);
+        if (settings.gett.orderByDefault) {
+            query.orderBy(settings.gett.orderByDefault)
+        }
     }
     api.search(query).then(function(response) {
         var issues = response.data;

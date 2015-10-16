@@ -114,6 +114,7 @@ function apiItem(type, method, path, headers, data) {
 function QueryBuilder() {
 
     var self = this;
+    this.orderByClause = '';
     this.query = {
         jql: '',
         startAt: 0,
@@ -166,9 +167,9 @@ function QueryBuilder() {
         orderBy: function(field, priority) {
             if (priority) {
                 // asc or desc
-                self.query.jql = _s.sprintf('%s order by %s, priority %s', self.query.jql, field, priority);
+                self.orderByClause = _s.sprintf(' order by %s, priority %s', field, priority);
             } else {
-                self.query.jql = _s.sprintf('%s order by %s ', self.query.jql, field);
+                self.orderByClause = _s.sprintf(' order by %s ', field);
             }
             return self.search;
         },
@@ -466,7 +467,7 @@ function QueryBuilder() {
     };
 
     this.toQuery = function() {
-        self.query.jql = _s.clean(self.query.jql);
+        self.query.jql = _s.clean(self.query.jql + self.orderByClause);
         return self.query;
     };
 

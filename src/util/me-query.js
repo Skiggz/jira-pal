@@ -6,5 +6,8 @@ module.exports = function() {
     if (settings.gett.defaultMeStatuses) {
         query.and().fields.status().in(settings.gett.defaultMeStatuses);
     }
+    if (settings.gett.orderByDefault) {
+        query.orderBy(settings.gett.orderByDefault)
+    }
     return query;
 };

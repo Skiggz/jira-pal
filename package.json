@@ -1,7 +1,7 @@
 {
   "name": "jira-pal",
   "private": false,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Jira Terminal Pal",
   "keywords": [],
   "dependencies": {
@@ -15,7 +15,7 @@
     "numeral": "~1.5.3",
     "open": "0.0.5",
     "underscore": "~1.8.2",
-    "underscore.string": "~3.0.3"
+    "underscore.string": "~3.2.2"
   },
   "preferGlobal": true,
   "bin": {

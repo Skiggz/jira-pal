@@ -31,6 +31,7 @@ var LabelSuggestion = require('../models/label-suggestion.js');
 var JiraRapidView = require('../models/rapid-view.js');
 var JiraRapidBoard = require('../models/rapid-board.js');
 var JiraTransition = require('../models/transition.js');
+var JiraComment = require('../models/comment.js');
 
 function api(method, path, headers, data) {
     return new Promise(function(resolve, reject) {
@@ -554,6 +555,10 @@ module.exports.comment = function(issueKey, comments) {
     return api('POST', _s.sprintf('/rest/api/2/issue/%s/comment', issueKey), null, {
         body: comments
     });
+};
+
+module.exports.comments = function(issueKey) {
+    return apiList(JiraComment, 'comments', 'GET', _s.sprintf('/rest/api/2/issue/%s/comment', issueKey));
 };
 
 module.exports.searchForUser = function(criteria) {

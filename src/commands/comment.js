@@ -15,15 +15,24 @@ function comment(issueKey) {
         if (!comments) {
             print.fail('No comment provided');
         } else {
-            api.comment(issueKey, comments)
-                .then(
-                function(r) {
-                    print.success('Your comment has been posted to ' + issueKey);
-                },
-                function(e) {
-                    print.error('There was a problem posting your comment ' + e ? e.message : '');
+            print.success(comments);
+            print.ask(
+                print.question('confirm', 'post', 'Post the above comment to ' + issueKey + '?')
+            ).then(function(answer) {
+                if (answer.post) {
+                    api.comment(issueKey, comments)
+                        .then(
+                        function(r) {
+                            print.success('Your comment has been posted to ' + issueKey);
+                        },
+                        function(e) {
+                            print.error('There was a problem posting your comment ' + e ? e.message : '');
+                        }
+                    );
+                } else {
+                    print.fail('Comment cancelled');
                 }
-            );
+            });
         }
     });
 }

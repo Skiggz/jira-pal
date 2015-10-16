@@ -155,6 +155,8 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * `username`: Jira username. This is used for fetching YOUR assigned stories and other various tasks related to you
   * Find this by navigating to your jira profile. The URL should look like `.../secure/ViewProfile.jspa?name=USERNAME`
 * `defaultCommand`: The default command that runs when you run `node jira.js`. Default `help`. Suggested `me`.
+* `orderByDefault`: Order your me searches by a particular field. In many cases "Rank" or "Priority" is desired..
+* `useActiveSprintsForMeCommand`: If yes, the jql "sprint in openSprints()" is used for searching, to avoid bringing back all kinds of random stories that match desired criteria.
 * `defaultMeStatuses`: The statuses to include in your `me` search. Default `In Progress`. This is a CSV. (Ex: `Foo Status,Done,My Status`)
 
 ##Security

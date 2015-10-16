@@ -29,6 +29,24 @@
 
 * `jira <command> <options`
 
+##TLDR
+
+Examples can be found below under "Examples" or by running `jira help`. But if you're just getting started, try:
+
+* `jira init`
+* `jira me`
+* `jira copy`
+* `jira commit` (inside of a directory that is git tracked with changes staged)
+* `jira me some search text` where "some search text" is some text in a story you are looking for, assigned to you
+* `jira board` or `jira board -a` or `jira board -p my-project`
+* `jira new` (create a story)
+* `jira open`
+* `jira comment`
+* `jira flow` to change story states
+* `jira user lookup bob`
+
+There is obviously a lot of enhancements coming, but I think the above commands are good starting points for learning the tool. More below.
+
 ##Examples
 
 * `jira help`

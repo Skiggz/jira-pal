@@ -8,7 +8,7 @@ var fs = require('fs');
 module.exports = function() {
     selectIssue(meQueryOrSearch.apply(this, _.toArray(arguments)), true).then(function(issues) {
         if (!issues || !issues.length) {
-            print.info('Please select at least one story, or type `git commit`...sheesh');
+            print.info('No stories found or selected');
             return;
         }
         var prefill = '# Enter shift+D then "i" to begin (if using vim). Thanks for using jira-pal!\n\n';

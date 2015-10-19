@@ -21,12 +21,12 @@ module.exports = function() {
                         });
                     },
                     function(e) {
-                        print.error('There was a problem looking up users ' + e ? e.message : '');
+                        print.fail('There was a problem looking up users ' + e ? e.message : '');
                     }
                 );
         break;
         default:
-            print.error('Command not supported: ' + action);
+            print.fail('Command not supported: ' + action);
         break;
     }
 };

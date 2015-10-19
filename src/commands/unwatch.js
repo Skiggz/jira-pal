@@ -12,7 +12,7 @@ function unwatch(issueKey) {
                 print.success('You are no longer watching ' + issueKey);
             },
             function(e) {
-                print.error('There was a problem trying to unwatch ' + e ? e.message : '');
+                print.fail('There was a problem trying to unwatch ' + e ? e.message : '');
             }
         );
 }

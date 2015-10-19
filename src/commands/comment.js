@@ -25,7 +25,7 @@ function comment(issueKey) {
                             print.success('Your comment has been posted to ' + issueKey);
                         },
                         function(e) {
-                            print.error('There was a problem posting your comment ' + e ? e.message : '');
+                            print.fail('There was a problem posting your comment ' + e ? e.message : '');
                         }
                     );
                 } else {

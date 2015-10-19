@@ -12,7 +12,7 @@ function watch(issueKey) {
                 print.success('You are now watching ' + issueKey);
             },
             function(e) {
-                print.error('There was a problem watching the issue ' + e ? e.message : '');
+                print.fail('There was a problem watching the issue ' + e ? e.message : '');
             }
         );
 }

@@ -26,7 +26,11 @@ module.exports = function() {
                 );
         break;
         default:
-            print.fail('Command not supported: ' + action);
+            if (action) {
+                print.fail('Command not supported: ' + action);
+            } else {
+                print.fail('You must specify a command. Ex: jira user lookup bob');
+            }
         break;
     }
 };

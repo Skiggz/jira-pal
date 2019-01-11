@@ -1,43 +1,43 @@
-#Jira Pal
+# Jira Pal
 
-####A jira terminal tool aimed to reduce or eliminate the need for the UI. Jira pal wants to save you a browser tab :)
+#### A jira terminal tool aimed to reduce or eliminate the need for the UI. Jira pal wants to save you a browser tab :)
 
-##What People Are Probably Saying
+## What People Are Probably Saying
 
->Wow!
+> Wow!
 
->I never knew life without the JIRA UI, this is life changing!
+> I never knew life without the JIRA UI, this is life changing!
 
->I can't believe it's not butter! I'd totally put it on some toast. 
+> I can't believe it's not butter! I'd totally put it on some toast. 
 
 And many other positive things :D
 
-##Installation
+## Installation
 
 * Install `node` if you do not have it
 * Install `npm` if applicable
 * Run `npm install jira-pal --global`
 * Run commands. Suggested initial command `jira init`
 
-##Possible Issues with NPM and Node
+## Possible Issues with NPM and Node
 
 * Setting up NPM can be real fun, or not real fun. You may need to use `sudo` for your installs on unix environments
 * If you run into permission issues, [Try This!](https://docs.npmjs.com/getting-started/fixing-npm-permissions)
   * Particularly changing ownership of your npm directory
 
-##Possible Issues with Jira Pal!
+## Possible Issues with Jira Pal!
 * Yep, it's still young. If you encounter a bug, please add a github issue
 * If things seem to get totally borked, try running `jira logout`, `jira evict` and then re running `jira init`.
   * These are always safe bets to start over.
 
-##Possible Issues with installing (errors about fetching dependencies)
+## Possible Issues with installing (errors about fetching dependencies)
 * Make sure you have an SSH key setup in git :)
 
-##Usage
+## Usage
 
 * `jira <command> <options`
 
-##Setup via init 
+## Setup via init 
 
 * You want to run `jira init`
 * You want to get your jira url and username correct ;)
@@ -52,7 +52,7 @@ that most commands default to your "me" commands unless otherwise specified, eit
 the particular command you are using. So you'll have a much better time if you pick statuses for your "me" commands that 
 make sense to you and what you want.
 
-##TLDR
+## TLDR
 
 Examples can be found below under "Examples" or by running `jira help`. But if you're just getting started, try:
 
@@ -70,7 +70,7 @@ Examples can be found below under "Examples" or by running `jira help`. But if y
 
 There is obviously a lot of enhancements coming, but I think the above commands are good starting points for learning the tool. More below.
 
-##Examples
+## Examples
 
 * `jira help`
   * View list of commands and what they do
@@ -146,19 +146,19 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * `jira evict`
   * Clear caches
 
-##Searching
+## Searching
 
 * As noted in the examples above, `lookup` is the command you want to use to enter raw jql queries. There is an example using `jira help lookup`.
 * JQL is defined here on jiras website under [Advanced Searching](https://confluence.atlassian.com/jira/advanced-searching-179442050.html)
 * `search`, `me` and `copy` commands all search using "text contains ____" where the blank is whatever you type
   * Example: `jira search foobar` is actually doing a JQL search of "text contains foobar"
 
-##Hacking
+## Hacking
 
 * If you are using jira locally via pulling down the repo, and using the live version via npm you may want to:
   * Alias your local jira-pal jira.js file for ease of use
 
-##Settings
+## Settings
 
 * Default settings are stored in `data/settings.js`
 * To override settings run `jira init` and follow the prompts
@@ -166,7 +166,7 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * Jira pal stores settings and crednetials in a folder `.jira-pal` in your home directory
   * If you would like to change this, set system environment variable `JIRA_PAL_HOME`;
 
-###Current Settings Options
+### Current Settings Options
 
 * `url`: The url for your jira installation. `Required`
 * `colors`: If truthy, show terminal colors in output. Default `true`
@@ -177,7 +177,7 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * `useActiveSprintsForMeCommand`: If yes, the jql "sprint in openSprints()" is used for searching, to avoid bringing back all kinds of random stories that match desired criteria.
 * `defaultMeStatuses`: The statuses to include in your `me` search. Default `In Progress`. This is a CSV. (Ex: `Foo Status,Done,My Status`)
 
-##Security
+## Security
 
 * All endpoints are hit over HTTPS using Basic Authentication
 * Credentials are stored locally, and the file is not shared remotely
@@ -185,7 +185,7 @@ There is obviously a lot of enhancements coming, but I think the above commands 
 * This leaves majority of security up to the user to control, if you share your local credentials file, you may have a bad time
 * On non successful auth of any endpoint call, your credentials are removed and required on next use
 
-##Commands
+## Commands
 
 * All commands are in commands folder
 * See `core/commands` for documentation about adding commands and some features that exist
